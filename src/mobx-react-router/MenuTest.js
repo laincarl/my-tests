@@ -24,8 +24,9 @@ class MenuTest extends Component {
         <Menu.Item key="/">首页</Menu.Item>
         <Menu.Item key="/test">test</Menu.Item>
         <Menu.Item key="/tablenest">tablenest</Menu.Item>
-        <Menu.Item key="4">Option 4</Menu.Item>
-        <Menu.Item key="5">Option 5</Menu.Item>
+        <Menu.Item key="/cssmodule">cssmodule</Menu.Item>
+        <Menu.Item key="/cssmodule2">cssmodule2</Menu.Item>
+        <Menu.Item key="/cssmodule3">cssmodule3</Menu.Item>
         <Menu.Item key="6">Option 6</Menu.Item>
         <Menu.Item key="7">Option 7</Menu.Item>
         <Menu.Item key="8">Option 8</Menu.Item>

@@ -38,7 +38,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]'],
       },
       {
         test: /\.less$/,
