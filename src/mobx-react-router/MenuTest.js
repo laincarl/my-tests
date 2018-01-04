@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 import { inject, observer } from 'mobx-react';
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router';
 const SubMenu = Menu.SubMenu;
 // import menuStore from '../menuStore';
 @inject('routing')
@@ -18,8 +18,10 @@ class MenuTest extends Component {
         style={{ width: 256 }}
         selectedKeys={[currentMenu]}
         onClick={({ item, key }) => {
-          console.log(key);
-          history.push(key);
+          // console.log(key);
+          if (routing.currentMenu() !== key) {
+            history.push(key);
+          }
         }}>
         <Menu.Item key="/">首页</Menu.Item>
         <Menu.Item key="/test">test</Menu.Item>
@@ -27,7 +29,7 @@ class MenuTest extends Component {
         <Menu.Item key="/cssmodule">cssmodule</Menu.Item>
         <Menu.Item key="/cssmodule2">cssmodule2</Menu.Item>
         <Menu.Item key="/cssmodule3">cssmodule3</Menu.Item>
-        <Menu.Item key="6">Option 6</Menu.Item>
+        <Menu.Item key="/pagination">pagination</Menu.Item>
         <Menu.Item key="7">Option 7</Menu.Item>
         <Menu.Item key="8">Option 8</Menu.Item>
         <Menu.Item key="9">Option 9</Menu.Item>
