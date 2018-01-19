@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Pagination, Spin } from 'antd';
+import { Pagination, Spin,Select } from 'antd';
+const Option = Select.Option;
+const children = [];
+for (let i = 10; i < 36; i++) {
+  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+}
+
 class MyPagination extends Component {
   constructor() {
     super();
@@ -35,6 +41,14 @@ class MyPagination extends Component {
             pageSize={1}
             total={30000}
           />
+          <Select
+          onPopupScroll={()=>{console.log('sss')}}   
+          defaultValue="a1"
+          // onChange={handleChange}
+          style={{ width: 200 }}
+        >
+          {children}
+        </Select>
         </Spin>
       </div>
     );

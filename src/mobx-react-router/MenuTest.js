@@ -30,6 +30,7 @@ class MenuTest extends Component {
         <Menu.Item key="/cssmodule2">cssmodule2</Menu.Item>
         <Menu.Item key="/cssmodule3">cssmodule3</Menu.Item>
         <Menu.Item key="/pagination">pagination</Menu.Item>
+        <Menu.Item key="/animation">animation</Menu.Item>
         <Menu.Item key="7">Option 7</Menu.Item>
         <Menu.Item key="8">Option 8</Menu.Item>
         <Menu.Item key="9">Option 9</Menu.Item>
