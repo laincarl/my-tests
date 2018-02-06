@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class componentName extends Component {
+class {%Component%} extends Component {
     render() {
         return (
             <div>
@@ -11,8 +11,8 @@ class componentName extends Component {
     }
 }
 
-componentName.propTypes = {
+{%Component%}.propTypes = {
 
 };
 
-export default componentName;
+export default {%Component%};

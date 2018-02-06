@@ -1,5 +1,5 @@
 var path = require('path');
-const fs  = require('fs')
+const fs = require('fs')
 const webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
@@ -11,12 +11,13 @@ module.exports = {
   // devtool: 'cheap-module-eval-source-map',
   devtool: 'eval',
   entry: {
-    app: './src/index.js',
+    app: ['react-hot-loader/patch', './src/index.js'],
     vendor: ['react', 'react-dom'], //分离第三方库
   },
 
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',//以保证 hot reloading 会在嵌套的路由有效。
     filename: 'app/[name]_[hash:8].js',
     chunkFilename: 'app/chunks/[name].[chunkhash:5].chunk.js',
   },
@@ -62,10 +63,15 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          plugins: [['import', { libraryName: 'antd', style: true }]], // style: true 会加载 less 文件 style: 'css' 会加载 css 文件
-        },
+        use: [{
+          loader: 'react-hot-loader/webpack',
+        }, {
+          loader: 'babel-loader',
+          query: {
+            plugins: [['import', { libraryName: 'antd', style: true }]], // style: true 会加载 less 文件 style: 'css' 会加载 css 文件
+          },
+        }
+        ],
       },
       {
         test: /\.(ttf|eot|svg|woff|woff2)$/,
@@ -118,7 +124,7 @@ module.exports = {
       // },
     },
   },
-  plugins: [ 
+  plugins: [
     new LessThemePlugin({ theme: './theme.less' }),
     new ExtractTextPlugin('styles.css'),
     new webpack.optimize.CommonsChunkPlugin({

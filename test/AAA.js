@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Test extends Component {
+class AAA extends Component {
     render() {
         return (
             <div>
-                test......
+                
             </div>
         );
     }
 }
 
-Test.propTypes = {
+AAA.propTypes = {
 
 };
 
-export default Test;
+export default AAA;
