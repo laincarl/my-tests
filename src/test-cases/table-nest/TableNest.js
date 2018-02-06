@@ -105,6 +105,8 @@ const rowSelection = {
 export default class TableNest extends React.Component {
   render() {
     return (
+      <div>
+        table
       <Table
         columns={columns}
         rowSelection={rowSelection}
@@ -113,6 +115,7 @@ export default class TableNest extends React.Component {
           console.log(record);
         }}
       />
+      </div>
     );
   }
 }

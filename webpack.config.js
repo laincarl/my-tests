@@ -102,7 +102,8 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
     port: 3000,
-    // host:'0.0.0.0',
+    host: '0.0.0.0',//允许局域网通过ip访问
+    public: 'localhost:3000',//加了host之后，open会打开0.0.0.0，所以需要定义public
     stats: 'errors-only',
     open: true,
     proxy: {
