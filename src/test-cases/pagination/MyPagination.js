@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import omit from 'omit.js';
 import { Pagination, Spin,Select } from 'antd';
 const Option = Select.Option;
 const children = [];
@@ -20,6 +21,7 @@ class MyPagination extends Component {
   }
 
   loadData = page => {
+    console.log(omit({a:'a',b:{c:'c'},c:function(){}},[]));
     console.log(page);
     this.setState({ loading: true });
     setTimeout(() => {

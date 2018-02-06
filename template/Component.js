@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class UserStoryMap extends Component {
+class componentName extends Component {
     render() {
         return (
             <div>
-                用户故事地图
+                
             </div>
         );
     }
 }
 
-UserStoryMap.propTypes = {
+componentName.propTypes = {
 
 };
 
-export default UserStoryMap;
+export default componentName;

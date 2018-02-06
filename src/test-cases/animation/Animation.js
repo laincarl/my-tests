@@ -21,19 +21,18 @@ export default class Animation extends React.Component {
     }
     handleIncrease() {
         var arr = this.state.item;
-        arr = [...this.state.item, { test: "1212" }];
-        console.log(arr);
+        if (arr.length === 0) {
+            arr.push({ test: "1212" });
+        } else {
+            arr.splice(0, 1);
+        }
         this.setState({
             item: arr
         });
     }
     handleDecrease() {
         var arr = this.state.item;
-        arr.splice(arr.length - 1, 1);
-        console.log(arr);
-        this.setState({
-            item: arr
-        });
+
     }
     render() {
         var it = this.state.item.map(function (item) {
@@ -41,6 +40,7 @@ export default class Animation extends React.Component {
         });
         console.log(it);
         return (
+            
             <div>
                 <ReactCssTransitionGroup
                     transitionName="example"
@@ -49,20 +49,22 @@ export default class Animation extends React.Component {
                 >
                     {it}
                 </ReactCssTransitionGroup>
+                <div style={{overflow:'hidden'}}>
                 <ReactCssTransitionGroup
-                    transitionName="example"
+                    transitionName="example2"
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
                 >
-                    {this.state.show ? <div style={{ width: 50, height: 50 }}>show</div> : null}
+                    {this.state.show ? <div className="ss">show</div> : null}
                 </ReactCssTransitionGroup>
+                </div>
                 <button onClick={() => {
                     this.setState({
                         show: !this.state.show
                     })
                 }}>显示/隐藏</button>
-                <button onClick={this.handleIncrease}>增加</button>
-                <button onClick={this.handleDecrease}>减少</button>
+                <button onClick={this.handleIncrease}>显示/隐藏</button>
+
             </div>
         );
     }

@@ -4,6 +4,7 @@ const webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const LessThemePlugin = require('webpack-less-theme-plugin');
 const lessToJs = require('less-vars-to-js');
 const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, './theme.less'), 'utf8'));
 module.exports = {
@@ -53,7 +54,7 @@ module.exports = {
             loader: 'less-loader',
             options: {
               sourceMap: process.env.NODE_ENV === 'production' ? false : true,
-              modifyVars:themeVariables//定制antd主题
+              // modifyVars:themeVariables//定制antd主题
             },
           },
         ],
@@ -117,7 +118,8 @@ module.exports = {
       // },
     },
   },
-  plugins: [
+  plugins: [ 
+    new LessThemePlugin({ theme: './theme.less' }),
     new ExtractTextPlugin('styles.css'),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'], //name是提取公共代码块后js文件的名字。
