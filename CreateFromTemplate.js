@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const basicPath = path.resolve(__dirname, './');
+const basicPath = path.resolve(__dirname, './src/test-cases');
 const dirPath = path.resolve(__dirname, './template');
-const CreateFromTemplate = function (replaceCode, replace, originPath, targetPath) {
+
+const CreateFromTemplate = function (replaceCode, replace, originPath) {
+    const targetPath=replace.toLowerCase();
     console.log(replaceCode, originPath, targetPath);
     fs.readFile(path.resolve(dirPath, `./${originPath}`), 'utf8', (err, data) => {
         if (err) {

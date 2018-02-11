@@ -126,7 +126,7 @@ module.exports = {
     },
   },
   plugins: [
-    new LessThemePlugin({ theme: './theme.less' }),
+    new LessThemePlugin({ theme: './theme.less' }),//使antd主题可以热加载
     new ExtractTextPlugin('styles.css'),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'], //name是提取公共代码块后js文件的名字。
