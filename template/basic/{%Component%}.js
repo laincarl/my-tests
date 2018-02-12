@@ -5,7 +5,7 @@ class {%Component%} extends Component {
     render() {
         return (
             <div>
-                
+                {%Component%}
             </div>
         );
     }

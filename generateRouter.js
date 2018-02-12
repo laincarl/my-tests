@@ -17,11 +17,14 @@ fs.readdir(basicPath, (err, files) => {
       if (err) {
         console.log(err);
       } else {
-        const reg = /import\s+([^]*?)from/g;
+        const reg = /const([^]*?)=/g;
         const arr = [];
         while (result = reg.exec(data)) {
           arr.push(result[1]);
           const oneItem = result[1].trim();
+          // imports.push(
+          //   `const ${oneItem} = asyncComponent(() => import("./test-cases/${file}"));`
+          // )
           routers.push(
             `<Route path="/${oneItem}" component={${oneItem}} />`
           )
@@ -34,18 +37,18 @@ fs.readdir(basicPath, (err, files) => {
           exportModules.push(
             `export { ${arr.join(',')} } from './${file}';`
           )
-        } else {
+        } else if (arr.length > 0) {
           exportModules.push(
             `export { default as ${arr[0].trim()} } from './${file}';`
           )
         }
-        resolve(arr.join(','))
+        resolve(arr.length > 0 ? arr.join(',') : '')
       }
     }
     ))
 
   })).then((data) => {
-    const imports = data;
+    const imports = data.filter(one => one !== '');
     // console.log(files, imports, menus);
     CreateFiles(path.resolve(dirPath, './Router.js'), path.resolve(basicPath, '../Router.js'), { imports, routers: routers.join('\n') })
     CreateFiles(path.resolve(dirPath, './MenuTest.js'), path.resolve(basicPath, '../MenuTest.js'), { menus: menus.join('\n') })

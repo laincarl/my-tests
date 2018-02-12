@@ -40,7 +40,7 @@ async function getAnswer(params) {
   inquirer.prompt(questions).then(answers => {
     let { template, Component } = answers;
     //首字母大写
-    Component = Component[0].toUpperCase().concat(Component.substring(0));
+    Component = Component[0].toUpperCase().concat(Component.substring(1));
     CreateFromTemplate(template, { Component });
     // console.log(answers);
   });

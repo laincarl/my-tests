@@ -11,7 +11,7 @@ module.exports = {
   // devtool: 'cheap-module-eval-source-map',
   devtool: 'eval',
   entry: {
-    app: ['react-hot-loader/patch', './src/index.js'],
+    app: ['react-hot-loader/patch', 'babel-polyfill', './src/index.js'],
     vendor: ['react', 'react-dom'], //分离第三方库
   },
 
@@ -30,11 +30,11 @@ module.exports = {
   resolve: {
     modules: [path.resolve(__dirname, 'node_modules')], //优化webpack文件搜索范围
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.less'],
-    alias: {
-      Axios: path.resolve(__dirname, './src/axios.js'),
-      Store: path.resolve(__dirname, './src/store.js'),
-      asyncRouter: path.resolve(__dirname, './src/asyncRouter.js'),
-    },
+    // alias: {
+    //   Axios: path.resolve(__dirname, './src/axios.js'),
+    //   Store: path.resolve(__dirname, './src/store.js'),
+    //   asyncRouter: path.resolve(__dirname, './src/asyncRouter.js'),
+    // },
   },
   module: {
     rules: [

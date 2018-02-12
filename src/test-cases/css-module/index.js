@@ -1,4 +1,5 @@
-import CssModule from './CssModule';
-import CssModule2 from './CssModule2';
-import CssModule3 from './CssModule3';
+import asyncComponent from "../../AsyncComponent";
+const CssModule = asyncComponent(() => import('./CssModule'));
+const CssModule2 = asyncComponent(() => import('./CssModule2'));
+const CssModule3 = asyncComponent(() => import('./CssModule3'));
 export { CssModule, CssModule2, CssModule3 };
