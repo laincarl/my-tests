@@ -9,7 +9,7 @@ const dirPath = path.resolve(__dirname, './generate');
 fs.readdir(basicPath, (err, files) => {
   //路由路径
   files = files.filter(file => ['index.js', 'Home', 'NotFoundPage'].indexOf(file) === -1);
-  const routers = [], imports = [], menus = [], exportModules = [];
+  const routers = [], imports = [], async_imports = [], menus = [], exportModules = [];
   Promise.all(files.map(file => {
     let indexPath = path.resolve(basicPath, file, './index.js');
     //找出所有模块引用
@@ -17,14 +17,14 @@ fs.readdir(basicPath, (err, files) => {
       if (err) {
         console.log(err);
       } else {
-        const reg = /const([^]*?)=/g;
+        const reg = /import([^]*?)from/g;
         const arr = [];
         while (result = reg.exec(data)) {
           arr.push(result[1]);
           const oneItem = result[1].trim();
-          // imports.push(
-          //   `const ${oneItem} = asyncComponent(() => import("./test-cases/${file}"));`
-          // )
+          async_imports.push(
+            `const ${oneItem} = asyncComponent(() => import("./test-cases/${file}"));`
+          )
           routers.push(
             `<Route path="/${oneItem}" component={${oneItem}} />`
           )
@@ -50,7 +50,8 @@ fs.readdir(basicPath, (err, files) => {
   })).then((data) => {
     const imports = data.filter(one => one !== '');
     // console.log(files, imports, menus);
-    CreateFiles(path.resolve(dirPath, './Router.js'), path.resolve(basicPath, '../Router.js'), { imports, routers: routers.join('\n') })
+    CreateFiles(path.resolve(dirPath, './Router.dev.js'), path.resolve(basicPath, '../Router.dev.js'), { imports, routers: routers.join('\n') })
+    CreateFiles(path.resolve(dirPath, './Router.pro.js'), path.resolve(basicPath, '../Router.pro.js'), { async_imports: async_imports.join('\n'), routers: routers.join('\n') })
     CreateFiles(path.resolve(dirPath, './MenuTest.js'), path.resolve(basicPath, '../MenuTest.js'), { menus: menus.join('\n') })
     CreateFiles(path.resolve(dirPath, './index.js'), path.resolve(basicPath, './index.js'), { exportModules: exportModules.join('\n') })
     // console.log(files, imports);

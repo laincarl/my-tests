@@ -1,3 +1,2 @@
-import asyncComponent from "../../AsyncComponent";
-const Modal = asyncComponent(() => import('./Use'));
+import Modal from './Use';
 export default Modal;

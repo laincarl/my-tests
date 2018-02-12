@@ -1,3 +1,2 @@
-import asyncComponent from "../../AsyncComponent";
-const Main = asyncComponent(() => import('./Main'));
+import Main from './Main';
 export default Main;

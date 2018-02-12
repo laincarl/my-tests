@@ -1,3 +1,2 @@
-import asyncComponent from "../../AsyncComponent";
-const MyPagination = asyncComponent(() => import('./MyPagination'));
+import MyPagination from './MyPagination';
 export default MyPagination;

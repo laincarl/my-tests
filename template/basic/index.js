@@ -1,4 +1,2 @@
-
-import asyncComponent from "../../AsyncComponent";
-const {%Component%} = asyncComponent(() => import('./{%Component%}'));
+import {%Component%} from './{%Component%}';
 export default {%Component%};

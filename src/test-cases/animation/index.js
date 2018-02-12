@@ -1,3 +1,2 @@
-import asyncComponent from "../../AsyncComponent";
-const Animation = asyncComponent(() => import('./Animation'));
+import Animation from './Animation';
 export default Animation;

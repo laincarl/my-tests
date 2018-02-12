@@ -1,3 +1,2 @@
-import asyncComponent from "../../AsyncComponent";
-const Home = asyncComponent(() => import('./Home'));
+import Home from './Home';
 export default Home

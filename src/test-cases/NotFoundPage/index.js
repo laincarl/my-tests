@@ -1,3 +1,2 @@
-import asyncComponent from "../../AsyncComponent";
-const NotFoundPage = asyncComponent(() => import('./NotFoundPage'));
+import NotFoundPage from './NotFoundPage';
 export default NotFoundPage

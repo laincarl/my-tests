@@ -4,7 +4,8 @@ import { createBrowserHistory } from 'history';
 import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import MenuTest from './MenuTest';
-import MyRouter from './Router';
+import ProRouter from './Router.pro';
+import DevRouter from './Router.dev';
 import menuStore from './menuStore';
 const stores = {
   // Key can be whatever you want
@@ -22,7 +23,7 @@ export default class App extends Component {
               <MenuTest />
             </div>
             <div>
-              <MyRouter />
+              {process.env.NODE_ENV === 'production' ? <ProRouter /> : <DevRouter />}
             </div>
           </div>
         </Router>

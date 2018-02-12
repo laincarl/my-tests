@@ -1,9 +1,10 @@
 export { default as Home  } from './Home';
 export { default as NotFoundPage  } from './notfoundpage';
-export {  CssModule , CssModule2 , CssModule3  } from './css-module';
-export { default as Main } from './Main';
-export { default as Modal } from './modal';
 export { default as Animation } from './Animation';
-export { default as Name } from './Name';
+export { default as CssModule } from './css-module';
+export { default as Main } from './Main';
+export { default as CssModule2 } from './css-module2';
+export { default as CssModule3 } from './css-module3';
 export { default as MyPagination } from './pagination';
 export { default as TableNest } from './table-nest';
+export { default as Modal } from './modal';

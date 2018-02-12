@@ -1,3 +1,2 @@
-import asyncComponent from "../../AsyncComponent";
-const TableNest = asyncComponent(() => import('./TableNest'));
+import TableNest from './TableNest';
 export default TableNest;
