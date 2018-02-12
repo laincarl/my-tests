@@ -24,19 +24,13 @@ class MenuTest extends Component {
           }
         }}>
         <Menu.Item key="/">首页</Menu.Item>
-        <Menu.Item key="/test">test</Menu.Item>
-        <Menu.Item key="/tablenest">tablenest</Menu.Item>
+        {%menus%}
+        {/* <Menu.Item key="/tablenest">tablenest</Menu.Item>
         <Menu.Item key="/cssmodule">cssmodule</Menu.Item>
         <Menu.Item key="/cssmodule2">cssmodule2</Menu.Item>
         <Menu.Item key="/cssmodule3">cssmodule3</Menu.Item>
         <Menu.Item key="/pagination">pagination</Menu.Item>
-        <Menu.Item key="/animation">animation</Menu.Item>
-        <Menu.Item key="7">Option 7</Menu.Item>
-        <Menu.Item key="8">Option 8</Menu.Item>
-        <Menu.Item key="9">Option 9</Menu.Item>
-        <Menu.Item key="10">Option 10</Menu.Item>
-        <Menu.Item key="11">Option 11</Menu.Item>
-        <Menu.Item key="12">Option 12</Menu.Item>
+        <Menu.Item key="/animation">animation</Menu.Item> */}        
       </Menu>
     );
   }

@@ -1,17 +1,10 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { Home, NotFoundPage, Animation ,CssModule ,CssModule2 ,CssModule3 ,Main ,Modal ,MyPagination ,TableNest  } from './test-cases';
+import { Home, NotFoundPage, {%imports%} } from './test-cases';
 const PageSet = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/Main" component={Main} />
-<Route path="/CssModule" component={CssModule} />
-<Route path="/CssModule2" component={CssModule2} />
-<Route path="/CssModule3" component={CssModule3} />
-<Route path="/TableNest" component={TableNest} />
-<Route path="/MyPagination" component={MyPagination} />
-<Route path="/Modal" component={Modal} />
-<Route path="/Animation" component={Animation} />
+    {%routers%}
     {/* <Route path="/tablenest" component={TableNest} />
     <Route path="/cssmodule" component={CssModule} />
     <Route path="/cssmodule2" component={CssModule2} />

@@ -1,2 +1,2 @@
-import TableNest from './TableNest';
-export default TableNest;
+import Modal from './Use';
+export default Modal;

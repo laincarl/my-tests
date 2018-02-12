@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-class {%Component%} extends Component {
+import './Main.css'
+class Main extends Component {
     render() {
         return (
             <div>
-                
+                main
             </div>
         );
     }
 }
 
-{%Component%}.propTypes = {
+Main.propTypes = {
 
 };
 
-export default {%Component%};
+export default Main;

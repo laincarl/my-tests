@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { createBrowserHistory } from 'history';
 import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
-import MenuTest from './test-cases/mobx-react-router/MenuTest';
+import MenuTest from './MenuTest';
 import MyRouter from './Router';
 import menuStore from './menuStore';
 const stores = {
