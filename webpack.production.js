@@ -8,6 +8,7 @@ process.env.NODE_ENV = 'production';
 module.exports = merge(webpackProConfig, {
   // entry: './src/index.prod',
   devtool: false,
+  entry: './src/index.pro.js',
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,//最紧凑的输出

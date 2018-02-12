@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import asyncComponent from './AsyncComponent';
-const Home = asyncComponent(() => import("./test-cases/Main"));
+const Home = asyncComponent(() => import("./test-cases/Home"));
 const NotFoundPage = asyncComponent(() => import("./test-cases/NotFoundPage"));
 {%async_imports%}
 const PageSet = () => (
