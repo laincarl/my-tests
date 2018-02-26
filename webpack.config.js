@@ -12,7 +12,7 @@ module.exports = {
   devtool: 'eval',
   entry: {
     app: ['react-hot-loader/patch', 'babel-polyfill', './src/index.js'],
-    vendor: ['react', 'react-dom'], //分离第三方库
+    // vendor: ['react', 'react-dom'], //分离第三方库
   },
 
   output: {
@@ -143,7 +143,7 @@ module.exports = {
       },
       // hash: true,
       // excludeChunks:['contact'],
-      // chunks: ['manifest', 'vendor', 'app'],
+      chunks: ['manifest', 'vendor', 'app'],
       // chunks:['vendor','app'],
       template: './src/index.ejs', // Load a custom template (ejs by default see the FAQ for details)
     }),

@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import MenuTest from './MenuTest';
-import DevRouter from './Router.dev';
+import DevRouter from './Router';
 import menuStore from './menuStore';
 const stores = {
   // Key can be whatever you want

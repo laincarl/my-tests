@@ -17,7 +17,7 @@ fs.readdir(basicPath, (err, files) => {
       if (err) {
         console.log(err);
       } else {
-        const reg = /import([^]*?)from/g;
+        const reg = /export default([^]*?);/g;
         const arr = [];
         while (result = reg.exec(data)) {
           arr.push(result[1]);
@@ -50,8 +50,8 @@ fs.readdir(basicPath, (err, files) => {
   })).then((data) => {
     const imports = data.filter(one => one !== '');
     // console.log(files, imports, menus);
-    CreateFiles(path.resolve(dirPath, './Router.dev.js'), path.resolve(basicPath, '../Router.dev.js'), { imports, routers: routers.join('\n') })
-    CreateFiles(path.resolve(dirPath, './Router.pro.js'), path.resolve(basicPath, '../Router.pro.js'), { async_imports: async_imports.join('\n'), routers: routers.join('\n') })
+    CreateFiles(path.resolve(dirPath, './Router.js'), path.resolve(basicPath, '../Router.js'), { imports, routers: routers.join('\n') })
+    // CreateFiles(path.resolve(dirPath, './Router.pro.js'), path.resolve(basicPath, '../Router.pro.js'), { async_imports: async_imports.join('\n'), routers: routers.join('\n') })
     CreateFiles(path.resolve(dirPath, './MenuTest.js'), path.resolve(basicPath, '../MenuTest.js'), { menus: menus.join('\n') })
     CreateFiles(path.resolve(dirPath, './index.js'), path.resolve(basicPath, './index.js'), { exportModules: exportModules.join('\n') })
     // console.log(files, imports);
