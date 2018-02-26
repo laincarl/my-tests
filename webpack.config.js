@@ -30,11 +30,9 @@ module.exports = {
   resolve: {
     modules: [path.resolve(__dirname, 'node_modules')], //优化webpack文件搜索范围
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.less'],
-    // alias: {
-    //   Axios: path.resolve(__dirname, './src/axios.js'),
-    //   Store: path.resolve(__dirname, './src/store.js'),
-    //   asyncRouter: path.resolve(__dirname, './src/asyncRouter.js'),
-    // },
+    alias: {
+      Loading: path.resolve(__dirname, './src/Loading.js'),      
+    },
   },
   module: {
     rules: [
