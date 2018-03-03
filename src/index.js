@@ -7,7 +7,7 @@ import App from './App';
 // const history = syncHistoryWithStore(browserHistory, routingStore);
 const render = (Component) => {
   ReactDOM.render(
-    <AppContainer>
+    <AppContainer key={Math.random()}>
       <Component />
     </AppContainer>,
     document.getElementById('root'),
