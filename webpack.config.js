@@ -105,16 +105,16 @@ module.exports = {
     stats: 'errors-only',
     open: true,
     proxy: {
-      '/kanban/*': {
-        target: 'http://123.207.142.127:8378',
-        changeOrigin: true,
-        pathRewrite: { '^/kanban': '' },
-      },
-      // '*': {
-      //   target: 'http://123.207.142.127:8378',
+      // '/kanban/*': {
+      //   target: 'http://localhost:8000',
       //   changeOrigin: true,
       //   pathRewrite: { '^/kanban': '' },
       // },
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        pathRewrite: {'^/api' : ''}
+      },
       // proxy: {
       //   '/api/**': {
       //     target: 'http://123.207.142.127:8378',
