@@ -24,17 +24,19 @@ class MenuTest extends Component {
           }
         }}>
         <Menu.Item key="/">首页</Menu.Item>
-        <Menu.Item key="/Animation">Animation</Menu.Item>
+        <Menu.Item key="/CssModule">CssModule</Menu.Item>
+<Menu.Item key="/Animation">Animation</Menu.Item>
 <Menu.Item key="/CssModule2">CssModule2</Menu.Item>
 <Menu.Item key="/CssModule3">CssModule3</Menu.Item>
-<Menu.Item key="/CssModule">CssModule</Menu.Item>
-<Menu.Item key="/DomToImage">DomToImage</Menu.Item>
 <Menu.Item key="/Drag">Drag</Menu.Item>
-<Menu.Item key="/Modal">Modal</Menu.Item>
 <Menu.Item key="/Main">Main</Menu.Item>
+<Menu.Item key="/DomToImage">DomToImage</Menu.Item>
+<Menu.Item key="/Modal">Modal</Menu.Item>
 <Menu.Item key="/MyPagination">MyPagination</Menu.Item>
-<Menu.Item key="/TreeShape">TreeShape</Menu.Item>
 <Menu.Item key="/TableNest">TableNest</Menu.Item>
+<Menu.Item key="/TableDrag">TableDrag</Menu.Item>
+<Menu.Item key="/TableCol">TableCol</Menu.Item>
+<Menu.Item key="/TreeShape">TreeShape</Menu.Item>
         {/* <Menu.Item key="/tablenest">tablenest</Menu.Item>
         <Menu.Item key="/cssmodule">cssmodule</Menu.Item>
         <Menu.Item key="/cssmodule2">cssmodule2</Menu.Item>

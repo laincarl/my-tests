@@ -1,31 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { AppContainer } from 'react-hot-loader'
 import App from './App';
-
-// const history = syncHistoryWithStore(browserHistory, routingStore);
-const render = (Component) => {
-  ReactDOM.render(
-    <AppContainer key={Math.random()}>
-      <Component />
-    </AppContainer>,
-    document.getElementById('root'),
-  )
-}
-
-render(App)
-
-// Webpack Hot Module Replacement API
-if (module.hot) {
-  module.hot.accept('./App', () => { render(App) })
-}
-
-// ReactDOM.render(
-//   <Provider {...stores}>
-//     <Router history={createBrowserHistory}>
-//       <App />
-//     </Router>
-//   </Provider>,
-//   document.getElementById('root'),
-// );
+ReactDOM.render( <App />, document.getElementById('root'));
