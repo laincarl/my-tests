@@ -32,7 +32,7 @@ const CreateFiles = async function CreateFiles(originPath, targetPath, replaceCo
   return value;
 }
 
-const CreateFromTemplate = function (template, replaceCode) {
+const CreateFromTemplate = (template, replaceCode) => new Promise((resolve, reject) => {
   const originPath = path.resolve(dirPath, template);
   // 遍历文件夹，替换所有改变路径
   traversefolder(originPath)
@@ -53,8 +53,10 @@ const CreateFromTemplate = function (template, replaceCode) {
         return CreateFiles(file, targetPath, replaceCode);
       })).then(() => {
         console.log("模块创建成功");
+        resolve();
       })
     })
     .catch(e => console.error(e));
 }
+)
 module.exports = { CreateFromTemplate, CreateFiles };

@@ -1,4 +1,5 @@
 const { CreateFromTemplate } = require('./CreateFromTemplate');
+const  generateRouter  = require('./generateRouter');
 const fs = require('fs');
 const { promisify } = require('util');
 const readdir = promisify(fs.readdir);
@@ -41,7 +42,9 @@ async function getAnswer(params) {
     let { template, Component } = answers;
     //首字母大写
     Component = Component[0].toUpperCase().concat(Component.substring(1));
-    CreateFromTemplate(template, { Component });
+    CreateFromTemplate(template, { Component }).then(()=>{
+      generateRouter();
+    });
     // console.log(answers);
   });
 }
