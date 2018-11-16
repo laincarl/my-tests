@@ -91,9 +91,9 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               config: {
-                  path: './config'    // 写到目录即可，文件名强制要求是postcss.config.js
-              }
-          }
+                path: './config', // 写到目录即可，文件名强制要求是postcss.config.js
+              },
+            },
           },
         ],
       },
@@ -110,7 +110,7 @@ module.exports = {
             loader: 'less-loader',
             options: {
               sourceMap: process.env.NODE_ENV !== 'production',
-              javascriptEnabled: true
+              javascriptEnabled: true,
             },
           },
         ],
@@ -123,7 +123,9 @@ module.exports = {
           query: {
             plugins: [['import', { libraryName: 'antd', style: true }]], // style: true 会加载 less 文件 style: 'css' 会加载 css 文件
           },
-        }
+        }, {
+          loader: 'eslint-loader',
+        },
         ],
       },
       {

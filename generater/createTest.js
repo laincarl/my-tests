@@ -1,53 +1,55 @@
 const { CreateFromTemplate } = require('./CreateFromTemplate');
-const  generateRouter  = require('./generateRouter');
+const generateRouter = require('./generateRouter');
 const fs = require('fs');
 const { promisify } = require('util');
+
 const readdir = promisify(fs.readdir);
 const path = require('path');
+
 const templatePath = path.resolve(__dirname, '../template');
 
-var inquirer = require('inquirer');
+const inquirer = require('inquirer');
 
 console.log('创建新模块');
 
-async function getAnswer(params) {
-  //读取template文件夹下的所有模块
+async function getAnswer() {
+  // 读取template文件夹下的所有模块
   const files = await readdir(templatePath);
-  var questions = [
+  const questions = [
     {
       type: 'list',
       name: 'template',
       message: '选择模板:',
       choices: files,
-      filter: function (val) {
+      filter(val) {
         return val.toLowerCase();
-      }
+      },
     },
     {
       type: 'input',
       name: 'Component',
-      message: "模块名字:",
-      validate: function (value) {
-        var pass = value.length > 0 && value.match(/^[a-zA-Z]*?$/g);
+      message: '模块名字:',
+      validate(value) {
+        const pass = value.length > 0 && value.match(/^[a-zA-Z]*?$/g);
         if (pass) {
           return true;
         }
         return '模块名只能为英文且不包含空格';
-      }
+      },
     },
 
   ];
 
-  inquirer.prompt(questions).then(answers => {
+  inquirer.prompt(questions).then((answers) => {
     let { template, Component } = answers;
-    //首字母大写
+    // 首字母大写
     Component = Component[0].toUpperCase().concat(Component.substring(1));
-    CreateFromTemplate(template, { Component }).then(()=>{
+    CreateFromTemplate(template, { Component }).then(() => {
       generateRouter();
     });
     // console.log(answers);
   });
 }
-getAnswer().then(data => {
+getAnswer().then(() => {
   // console.log('开始创建');
-})
+});

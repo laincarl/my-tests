@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './{%Component%}.css'
-class {%Component%} extends Component {
+import './ReactDrag.css'
+class ReactDrag extends Component {
     render() {
         return (
             <div>
-                {%Component%}
+                ReactDrag
             </div>
         );
     }
 }
 
-{%Component%}.propTypes = {
+ReactDrag.propTypes = {
 
 };
 
-export default {%Component%};
+export default ReactDrag;

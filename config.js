@@ -1,5 +1,4 @@
 const Routers = [{
-    menu: 'test',
-
-}]
+  menu: 'test',
+}];
 module.exports = Routers;
