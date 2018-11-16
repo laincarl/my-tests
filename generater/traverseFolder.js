@@ -2,15 +2,16 @@ const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
 const { resolve } = require('path');
+
 const readdir = promisify(fs.readdir);
 const rename = promisify(fs.rename);
 const stat = promisify(fs.stat);
-//定义文件夹节点类型，包含本身路径名和子节点
+// 定义文件夹节点类型，包含本身路径名和子节点
 // var folderNode = function(name, children) {
 //   this.name = name;
 //   this.children = children;
 // };
-//遍历函数，传入一个节点，之后按照节点的name进行遍历，找出所有子节点
+// 遍历函数，传入一个节点，之后按照节点的name进行遍历，找出所有子节点
 // function traversefolder(node) {
 //   node = node instanceof folderNode ? node : new folderNode(node, null);
 
@@ -40,7 +41,7 @@ const stat = promisify(fs.stat);
 async function traversefolder(dir) {
   const subdirs = await readdir(dir);
   const files = await Promise.all(
-    subdirs.map(async subdir => {
+    subdirs.map(async (subdir) => {
       if (subdir !== 'System Volume Information') {
         const res = resolve(dir, subdir);
         return (await stat(res)).isDirectory() ? traversefolder(res) : res;

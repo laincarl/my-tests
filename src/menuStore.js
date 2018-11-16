@@ -1,5 +1,3 @@
-import { observable, computed, action, extendObservable } from 'mobx';
-
 class MenuStore {
   // @observable currentMenu=null;
 
