@@ -84,7 +84,7 @@ class ResizeAble extends Component {
       <div className="resizeable container" ref={this.saveRef('con')}>
         {this.props.children}
         {
-          ['top', 'topright', 'right', 'bottomright', 'bottom', 'bottomleft', 'left', 'lefttop']
+          ['top', 'right', 'bottom', 'left', 'bottomright', 'topright', 'bottomleft', 'lefttop']
             .map(position => <div role="none" className={`resizeable-bar-${position}`} onMouseDown={this.handleMouseDown.bind(this, position)} />)
         }
       </div>
