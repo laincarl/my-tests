@@ -6,14 +6,14 @@ class Test extends Component {
     return (
       <div>
         <ResizeAble
-          modes={['top', 'right', 'bottom', 'left', 'bottomright', 'topright', 'bottomleft', 'lefttop'] || ['right', 'bottom']}
+          modes={['top', 'right', 'bottom', 'left', 'bottomRight', 'topRight', 'bottomLeft', 'topLeft'] || ['right', 'bottom']}
           size={{
-            maxHeight: 500,
-            minWidth: 100,
-            maxWidth: 500,
+            // maxHeight: 500,
+            // minWidth: 100,
+            // maxWidth: 500,
           }}
         >
-          <div>sss</div>
+          <div style={{ textAlign: 'center' }}>sss</div>
         </ResizeAble>
       </div>
     );
