@@ -11,8 +11,6 @@ class ResizeAble extends Component {
     e.stopPropagation();
     e.preventDefault();
 
-    console.log('down');
-    console.log(e.clientX, e.clientY);
     this.initPosition = {
       mode,
       width: this.con.offsetWidth,
@@ -29,49 +27,81 @@ class ResizeAble extends Component {
     document.removeEventListener('mouseup', this.handleMouseUp);
   }
 
+  resizeWidth=(vary) => {
+    const { width: initWidth } = this.initPosition;
+    const { size } = this.props || {};
+    const {
+      height, width, minHeight, minWidth, maxHeight, maxWidth, 
+    } = size;
+    if ((maxWidth !== undefined && initWidth + vary > maxWidth)
+     || (minWidth !== undefined && initWidth + vary < minWidth)
+    ) {
+      return;
+    }
+    this.con.style.width = `${initWidth + vary}px`;
+  }
+
+  resizeHeight=(vary) => {
+    const { height: initHeight } = this.initPosition;
+    const { size } = this.props || {};
+    const {
+      height, width, minHeight, minWidth, maxHeight, maxWidth, 
+    } = size;
+    if ((maxHeight !== undefined && initHeight + vary > maxWidth)
+     || (minHeight !== undefined && initHeight + vary < minHeight)
+    ) {
+      return;
+    }
+    this.con.style.height = `${initHeight + vary}px`;
+  }
+
   handleMouseMove = (e) => {
     e.stopPropagation();
     e.preventDefault();
+    const { size } = this.props || {};
+    const {
+      height, width, minHeight, minWidth, maxHeight, maxWidth, 
+    } = size;
     requestAnimationFrame(() => {
       const {
         width, height, x, y, mode,
       } = this.initPosition;
       console.log(mode, e.clientY, y);
       switch (mode) {
-        case 'top': {
-          this.con.style.height = `${height - e.clientY - y}px`;
+        case 'top': {  
+          this.resizeHeight(y - e.clientY);
           break;
         }
         case 'topright': {
-          this.con.style.height = `${height - e.clientY - y}px`;
-          this.con.style.width = `${width + e.clientX - x}px`;
+          this.resizeHeight(y - e.clientY);
+          this.resizeWidth(e.clientX - x);          
           break;
         }
         case 'right': {
-          this.con.style.width = `${width + e.clientX - x}px`;
+          this.resizeWidth(e.clientX - x);
           break;
         }
         case 'bottomright': {
-          this.con.style.width = `${width + e.clientX - x}px`;
-          this.con.style.height = `${height + e.clientY - y}px`;
+          this.resizeWidth(e.clientX - x);
+          this.resizeHeight(e.clientY - y);
           break;
         }
         case 'bottom': {
-          this.con.style.height = `${height + e.clientY - y}px`;  
+          this.resizeHeight(e.clientY - y);
           break;
         }
         case 'bottomleft': {
-          this.con.style.height = `${height - e.clientY - y}px`;
-          this.con.style.width = `${width - e.clientX - x}px`;
+          this.resizeHeight(e.clientY - y);
+          this.resizeWidth(x - e.clientX);
           break;
         }
         case 'left': {
-          this.con.style.width = `${width - e.clientX - x}px`;
+          this.resizeWidth(x - e.clientX);
           break;
         }
         case 'lefttop': {
-          this.con.style.height = `${height - e.clientY - y}px`;
-          this.con.style.width = `${width - e.clientX - x}px`;
+          this.resizeHeight(y - e.clientY);
+          this.resizeWidth(x - e.clientX);
           break;
         }
         default: break;
@@ -80,12 +110,13 @@ class ResizeAble extends Component {
   }
 
   render() {
+    const { modes, children } = this.props;
     return (
       <div className="resizeable container" ref={this.saveRef('con')}>
-        {this.props.children}
+        {children}
         {
-          ['top', 'right', 'bottom', 'left', 'bottomright', 'topright', 'bottomleft', 'lefttop']
-            .map(position => <div role="none" className={`resizeable-bar-${position}`} onMouseDown={this.handleMouseDown.bind(this, position)} />)
+          // ['top', 'right', 'bottom', 'left', 'bottomright', 'topright', 'bottomleft', 'lefttop']
+          modes.map(position => <div role="none" className={`resizeable-bar-${position}`} onMouseDown={this.handleMouseDown.bind(this, position)} />)
         }
       </div>
     );

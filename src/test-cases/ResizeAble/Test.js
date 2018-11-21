@@ -5,7 +5,14 @@ class Test extends Component {
   render() {
     return (
       <div>
-        <ResizeAble>
+        <ResizeAble
+          modes={['top', 'right', 'bottom', 'left', 'bottomright', 'topright', 'bottomleft', 'lefttop'] || ['right', 'bottom']}
+          size={{
+            maxHeight: 500,
+            minWidth: 100,
+            maxWidth: 500,
+          }}
+        >
           <div>sss</div>
         </ResizeAble>
       </div>
@@ -13,5 +20,5 @@ class Test extends Component {
   }
 }
 
-        
+
 export default Test;
