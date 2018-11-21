@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import MenuTest from './MenuTest';
-import DevRouter from './Router';
+import Routes from './Router';
 import menuStore from './menuStore';
 
 const stores = {
@@ -23,7 +23,7 @@ class App extends Component {
               <MenuTest />
             </div>
             <div>
-              <DevRouter />
+              <Routes />
             </div>
           </div>
         </Router>
