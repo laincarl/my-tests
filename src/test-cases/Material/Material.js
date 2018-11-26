@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
 import Ripple from './Ripple';
+
 import './Material.css';
 
 class Material extends Component {
@@ -13,7 +14,7 @@ class Material extends Component {
   componentDidMount() {
     document.addEventListener('mouseup', this.removeRipple);
   }
-
+  
   componentWillUnmount() {
     document.removeEventListener('mouseup', this.removeRipple);
   }
@@ -38,13 +39,11 @@ class Material extends Component {
   }
 
   removeRipple = () => {
-    const { ripples, index } = this.state;
+    const { ripples } = this.state;
     if (ripples && ripples.length) {
-      this.setState(
-        {
-          ripples: ripples.slice(1),
-        },
-      );
+      this.setState({
+        ripples: [],
+      });
     }
   }
 
@@ -52,7 +51,7 @@ class Material extends Component {
     const { ripples } = this.state;
     const rippleWrapper = (
       <span ref={this.saveRef('rippleWrapper')} className="ripple-wrapper">
-        <TransitionGroup>
+        <TransitionGroup component={null}>
           {ripples}
         </TransitionGroup>
       </span>

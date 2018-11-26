@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Transition } from 'react-transition-group';
+import classNames from './classnames';
 
 const duration = 600;
 export default class Ripple extends Component {
@@ -9,7 +10,7 @@ export default class Ripple extends Component {
   }
 
   onEnter = (node) => {
-    console.log('onEnter box');
+    // console.log('onEnter box');
     setTimeout(() => {
       this.setState({
         entering: true,
@@ -21,15 +22,17 @@ export default class Ripple extends Component {
     this.setState({
       leaving: true,
     });
-    console.log('onExit box');
+    // console.log('onExit box');
   };
 
   render() {   
-    const { r, left, top } = this.props;
+    const {
+      r, left, top, ...otherProps 
+    } = this.props;
     const { entering, leaving } = this.state;
     return (
       <Transition
-        {...this.props}
+        {...otherProps}
         timeout={{
           enter: duration,
           exit: duration,
@@ -38,7 +41,14 @@ export default class Ripple extends Component {
         onExit={this.onExit}
       >
         <div 
-          className={`ripple ${entering && 'ripple-active'} ${leaving && 'ripple-done'}`}
+          className={
+            classNames(
+              'ripple', 
+              {
+                'ripple-active': entering,
+                'ripple-done': leaving,
+              },
+            )}
           style={{
             width: r * 2, height: r * 2, left, top, 
           }}
