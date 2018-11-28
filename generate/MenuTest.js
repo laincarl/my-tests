@@ -24,7 +24,7 @@ class MenuTest extends Component {
           }
         }}>
         <Menu.Item key="/">首页</Menu.Item>
-        {% menus %}
+        {%menus%}
         {/* <Menu.Item key="/tablenest">tablenest</Menu.Item>
         <Menu.Item key="/cssmodule">cssmodule</Menu.Item>
         <Menu.Item key="/cssmodule2">cssmodule2</Menu.Item>

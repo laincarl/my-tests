@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "new": "node ./generater/createTest.js",
+        "flash":"node ./generater/flashRouter.js",
         "dev": "webpack-dev-server --hot",
         "build": "npm run clean && webpack --config ./webpack.production.js",
         "build-pro": "npm run clean && webpack --config ./webpack.analyze.js",
