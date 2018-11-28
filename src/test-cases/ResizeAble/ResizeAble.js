@@ -59,13 +59,20 @@ const MODES = {
   },
 };
 class ResizeAble extends Component {
+  static defaultProps={
+    defaultSize: {
+      width: 200,
+      height: 200,
+    },
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       resizing: false,
       size: {
-        width: 'auto',
-        height: 'auto',
+        width: props.defaultSize ? props.defaultSize.width : 'auto',
+        height: props.defaultSize ? props.defaultSize.height : 'auto',
       },
       originSize: {
         width: 0,
@@ -76,6 +83,7 @@ class ResizeAble extends Component {
       mode: null,
     };
   }
+
 
   saveRef = name => (ref) => {
     this[name] = ref;
@@ -196,12 +204,8 @@ class ResizeAble extends Component {
   }
 
   render() {
-    const { modes, children } = this.props;
-    const { size, resizing, mode } = this.state;
-    const defaultSize = {
-      width: 200,
-      height: 200,
-    };
+    const { modes, children, defaultSize } = this.props;
+    const { size, resizing, mode } = this.state;    
     return (
       <div
         className="resizeable container"
@@ -213,6 +217,7 @@ class ResizeAble extends Component {
           }
         }
       >
+        {/* 拖动时，创建一个蒙层来显示拖动效果，防止鼠标指针闪烁 */}
         {resizing && (
           <div style={{
             position: 'fixed',

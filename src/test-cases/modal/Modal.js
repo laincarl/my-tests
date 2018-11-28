@@ -1,79 +1,54 @@
-/*eslint-disable */
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import { Modal } from 'antd';
+import { createPortal } from 'react-dom';
+import classnames from 'classnames';
+import './Modal.css';
 
-class MyModal extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props.father);
-    this.state = {
-      visible: true,
-    };
+export default class Modal extends Component {
+  state = {
+    visible: false,
+  };
+
+  static defaultProps = {
+    visible: false,
+  };
+
+  static getDerivedStateFromProps(props, state) {
+    // Any time the current user changes,
+    // Reset any parts of state that are tied to that user.
+    // In this simple example, that's just the email.
+    if (props.visible !== state.visible) {
+      if (props.visible) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+      return {
+        visible: props.visible,
+      };
+    }
+    return null;
   }
-  handleOk = () => {
-    this.setState({
-      visible: false,
-    });
+
+  onClose = () => {
+    const { onClose } = this.props;
+    onClose && onClose();
   };
-  handleCancel = () => {
-    console.log('Clicked cancel button');
-    this.setState({
-      visible: false,
-    });
-  };
+
   render() {
-    return (
-      <div>
-        <Modal
-          getContainer={() => this.props.father}
-          title="Title"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}>
-          <p>sss</p>
-        </Modal>
-      </div>
+    const { visible } = this.state;
+    return createPortal(
+      <div
+        className={classnames('modal-wrapper', {
+          'modal-hidden': !visible,
+        })}
+      >
+        <div className="modal-mask" />
+        <div className="modal">
+          <button onClick={this.onClose}>关闭</button>
+          {this.props.children}
+        </div>
+      </div>,
+      document.body,
     );
   }
 }
-const MountNode = {
-  prepare: () => {
-    var div = document.createElement('div');
-    document.body.appendChild(div);
-    var div2 = document.createElement('div');
-    let id = Math.random();
-    div2.id = id;
-    document.body.appendChild(div);
-    document.body.appendChild(div2);
-    // var MountedNode = ReactDOM.render(node, div);
-    return [div, div2];
-  },
-  mount: (node, div) => {
-    console.log(div);
-    var MountedNode = ReactDOM.render(node, div);
-    return MountedNode;
-  },
-  unmount: instance => {
-    document.body.removeChild(instance);
-  },
-};
-const FModal = {
-  success: () => {
-    console.log('success');
-    let mountNode = MountNode.prepare();
-    console.log(mountNode);
-    let instance = MountNode.mount(
-      <MyModal father={mountNode[1]} />,
-      mountNode[0],
-    );
-    console.log(instance);
-    // setTimeout(() => MountNode.unmount(instance), 1000);
-    // ReactDOM.render(<MyModal />, div);
-  },
-};
-
-MyModal.propTypes = {};
-
-export default FModal;

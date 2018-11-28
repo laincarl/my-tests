@@ -12,8 +12,12 @@ class Test extends Component {
             // minWidth: 100,
             // maxWidth: 500,
           }}
+          defaultSize={{
+            width: 200,
+            height: 200,
+          }}
         >
-          <div style={{ textAlign: 'center' }}>sss</div>
+          <div style={{ textAlign: 'center' }}>可变大小的div</div>
         </ResizeAble>
       </div>
     );
