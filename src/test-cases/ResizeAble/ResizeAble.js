@@ -125,7 +125,7 @@ class ResizeAble extends Component {
     if ((maxWidth !== undefined && initWidth + vary > maxWidth)
       || (minWidth !== undefined && initWidth + vary < minWidth)
     ) {
-      return initWidth;
+      return maxWidth;
     } else {
       return initWidth + vary;
     }
@@ -142,7 +142,7 @@ class ResizeAble extends Component {
     if ((maxHeight !== undefined && initHeight + vary > maxWidth)
       || (minHeight !== undefined && initHeight + vary < minHeight)
     ) {
-      return initHeight;
+      return maxHeight;
     } else {
       return initHeight + vary;
     }

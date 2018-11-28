@@ -8,9 +8,9 @@ class Test extends Component {
         <ResizeAble
           modes={['top', 'right', 'bottom', 'left', 'bottomRight', 'topRight', 'bottomLeft', 'topLeft'] || ['right', 'bottom']}
           size={{
-            // maxHeight: 500,
+            maxHeight: 500,
             // minWidth: 100,
-            // maxWidth: 500,
+            maxWidth: 500,
           }}
           defaultSize={{
             width: 200,
