@@ -3,7 +3,7 @@ import Modal from './Modal';
 
 export default class Test extends Component {
   state = {
-    visible: false,
+    visible: true,
   };
 
   handleModalClick = () => {
@@ -25,12 +25,12 @@ export default class Test extends Component {
   render() {
     const { visible } = this.state;
     return (
-      <div onClick={this.handleModalClick}>
+      <div onClick={this.handleModalClick} role="none">
         App
         <Modal visible={visible} onClose={this.handleModalClose}>
           <div>content</div>
         </Modal>
-        <button onClick={this.openModal}>打开</button>
+        <button type="button" onClick={this.openModal}>打开</button>
         <div style={{ height: 1000 }} />
       </div>
     );
