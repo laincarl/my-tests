@@ -1,0 +1,49 @@
+.tab-container {
+  overflow: hidden;
+}
+.tab-bar-container {
+  position: relative;
+}
+.tab-bar-ink {
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  box-sizing: border-box;
+  height: 2px;
+  transform-origin: 0 0;
+  background: red;
+  transition: all 0.3s ease-in-out;
+}
+.tab-bars {
+  display: flex;
+  border-bottom: 1px solid #bbb;
+}
+.tab-bar {
+  cursor: pointer;
+  padding: 12px;
+  margin-right: 10px;
+}
+.tab-bars:last-child {
+  margin-right: 0;
+}
+
+.tab-contents {
+  overflow: visible;
+  width: 100%;
+  display: flex;
+  will-change: margin-left;
+  transition: margin-left 0.3s ease-in-out;
+}
+.tab-content {
+  flex-shrink: 0;
+  width: 100%;
+}
+.tab-content-active {
+}
+.tab-content-inactive {
+  opacity: 0;
+  height: 0;
+  padding: 0 !important;
+  pointer-events: none;
+}

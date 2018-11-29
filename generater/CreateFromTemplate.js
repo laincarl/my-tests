@@ -22,13 +22,13 @@ const CreateFiles = async function CreateFiles(originPath, targetPath, replaceCo
   let data = await readFile(originPath, 'utf8');
   // 内容替换
   Object.keys(replaceCode).forEach((code) => {
-    const reg = new RegExp(`{%${code}%}`, 'g');
+    const reg = new RegExp(`{%\\s*${code}\\s*%}`, 'g');
     data = data.replace(reg, match => replaceCode[code]);
   });
   ensureDirectoryExistence(targetPath);
   const value = await writeFile(targetPath, data);
   // await会阻塞后面代码
-  console.log(path.basename(targetPath), '创建成功');
+  // console.log(path.basename(targetPath), '创建成功');
   return value;
 };
 
@@ -43,9 +43,7 @@ const CreateFromTemplate = (template, replaceCode) => new Promise((resolve, reje
         let relativePath = path.relative(originPath, file);
         Object.keys(replaceCode).forEach((code) => {
           const reg = new RegExp(`{%${code}%}`, 'g');
-          relativePath = relativePath.replace(reg, match => 
-            // console.log('替换', match, '为', replaceCode[code]);
-            replaceCode[code]);
+          relativePath = relativePath.replace(reg, match => replaceCode[code]);
         });
         const targetPath = path.resolve(basicPath, replaceCode.Component, relativePath);
         // aysnc函数返回一个promise对象

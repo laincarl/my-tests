@@ -33,7 +33,9 @@ export default class Modal extends Component {
     return null;
   }
 
-
+  /**
+   * 保存点击位置，使modal从点击位置展开
+   */
   saveClickPosition = (e) => {   
     const { clientX, clientY } = e;
     this.clickPosition = {

@@ -1,7 +1,5 @@
 const fs = require('fs');
-const { URL } = require('url');
 const path = require('path');
-const Router = require('../config'); // router配置信息
 const { CreateFiles } = require('./CreateFromTemplate');
 
 const basicPath = path.resolve(__dirname, '../src/test-cases');
@@ -37,7 +35,7 @@ function generateRouter() {
               `<Menu.Item key="/${oneItem}">${oneItem}</Menu.Item>`,
             );
           }
-          console.log(arr.join(','));
+          // console.log(arr.join(','));
           if (arr.length > 1) {
             exportModules.push(
               `export { ${arr.join(',')} } from './${file}';`,
@@ -52,12 +50,9 @@ function generateRouter() {
       }));
     })).then((data) => {
       const imports = data.filter(one => one !== '');
-      // console.log(files, imports, menus);
       CreateFiles(path.resolve(dirPath, './Router.js'), path.resolve(basicPath, '../Router.js'), { imports, routers: routers.join('\n') });
-      // CreateFiles(path.resolve(dirPath, './Router.pro.js'), path.resolve(basicPath, '../Router.pro.js'), { async_imports: async_imports.join('\n'), routers: routers.join('\n') })
       CreateFiles(path.resolve(dirPath, './MenuTest.js'), path.resolve(basicPath, '../MenuTest.js'), { menus: menus.join('\n') });
       CreateFiles(path.resolve(dirPath, './index.js'), path.resolve(basicPath, './index.js'), { exportModules: exportModules.join('\n') });
-      // console.log(files, imports);
     });
   });
 }

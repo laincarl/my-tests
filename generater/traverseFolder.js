@@ -1,10 +1,8 @@
 const fs = require('fs');
-const path = require('path');
 const { promisify } = require('util');
 const { resolve } = require('path');
 
 const readdir = promisify(fs.readdir);
-const rename = promisify(fs.rename);
 const stat = promisify(fs.stat);
 // 定义文件夹节点类型，包含本身路径名和子节点
 // var folderNode = function(name, children) {
