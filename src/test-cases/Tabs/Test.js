@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Tabs from './Tabs';
-import './Tabs.css';
+import './Tabs.less';
 
 function callback(key) {
   console.log(key);

@@ -1,13 +1,10 @@
 export { default as Home  } from './Home';
 export { default as NotFoundPage  } from './notfoundpage';
 export { default as Anchor } from './Anchor';
-export { default as CssModule2 } from './css-module2';
-export { default as CssModule } from './css-module';
-export { default as CssModule3 } from './css-module3';
-export { default as Main } from './Main';
 export { default as Dragreact } from './Dragreact';
+export { default as Main } from './Main';
 export { default as Material } from './Material';
 export { default as Modal } from './modal';
-export { default as ResizeAble } from './ResizeAble';
-export { default as Tabs } from './Tabs';
 export { default as TreeRender } from './TreeRender';
+export { default as Tabs } from './Tabs';
+export { default as ResizeAble } from './ResizeAble';
