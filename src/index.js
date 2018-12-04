@@ -19,10 +19,13 @@ class App extends Component {
       <Provider {...stores}>
         <Router history={createBrowserHistory}>
           <div style={{ display: 'flex' }}>
-            <div>
+            <div style={{
+              width: 256, height: '100vh', overflowX: 'hidden', overflowY: 'auto', 
+            }}
+            >
               <MenuTest />
             </div>
-            <div>
+            <div style={{ flex: 1, height: '100vh', overflow: 'auto' }}>
               <Routes />
             </div>
           </div>

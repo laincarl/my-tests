@@ -15,7 +15,7 @@ class MenuTest extends Component {
     return (
       <Menu
         mode="inline"
-        style={{ width: 256, height: '100vh', overflowY: 'auto' }}
+        style={{ height: '100%'}}
         selectedKeys={[currentMenu]}
         onClick={({ item, key }) => {
           // console.log(key);

@@ -15,7 +15,7 @@ class MenuTest extends Component {
     return (
       <Menu
         mode="inline"
-        style={{ width: 256, height: '100vh', overflowY: 'auto' }}
+        style={{ height: '100%'}}
         selectedKeys={[currentMenu]}
         onClick={({ item, key }) => {
           // console.log(key);
@@ -25,13 +25,13 @@ class MenuTest extends Component {
         }}>
         <Menu.Item key="/">首页</Menu.Item>
         <Menu.Item key="/Anchor">Anchor</Menu.Item>
-<Menu.Item key="/Dragreact">Dragreact</Menu.Item>
 <Menu.Item key="/Main">Main</Menu.Item>
-<Menu.Item key="/Material">Material</Menu.Item>
+<Menu.Item key="/Dragreact">Dragreact</Menu.Item>
 <Menu.Item key="/Modal">Modal</Menu.Item>
-<Menu.Item key="/TreeRender">TreeRender</Menu.Item>
-<Menu.Item key="/Tabs">Tabs</Menu.Item>
+<Menu.Item key="/Material">Material</Menu.Item>
 <Menu.Item key="/ResizeAble">ResizeAble</Menu.Item>
+<Menu.Item key="/Tabs">Tabs</Menu.Item>
+<Menu.Item key="/TreeRender">TreeRender</Menu.Item>
         {/* <Menu.Item key="/tablenest">tablenest</Menu.Item>
         <Menu.Item key="/cssmodule">cssmodule</Menu.Item>
         <Menu.Item key="/cssmodule2">cssmodule2</Menu.Item>
