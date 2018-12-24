@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import './Main.css'
+import './Main.css';
+import Pic from './test.gif';
+
 class Main extends Component {
-    render() {
-        return (
-            <div>
-                main
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <img src={Pic} alt="" />
+      </div>
+    );
+  }
 }
-
-Main.propTypes = {
-
-};
 
 export default Main;

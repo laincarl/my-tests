@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DragItem from './DragItem'
+import DragItem from './DragItem';
+
 class Dragreact extends Component {
   render() {
-    const items = ['1', '2', '3', '4']
+    const items = ['1', '2', '3', '4'];
     return (
       <div>
-        Dragreact
+        {'Dragreact'}
         {items.map(item => <DragItem text={item} />)}
       </div>
     );

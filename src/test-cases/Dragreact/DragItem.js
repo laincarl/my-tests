@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Dragreact.css'
+import './Dragreact.css';
+
 class DragItem extends Component {
   state = {
-    over: false
+    over: false,
   }
+
   render() {
     const { text } = this.props;
     const { over } = this.state;
     return (
       <div
-        ref={instance => this.instance = instance}
+        ref={(instance) => { this.instance = instance; }}
         className="item"
         style={{
-          background: over && 'green'
+          background: over && 'green',
         }}
-        draggable={true}
-        draggable
+        draggable        
         onDragStart={() => {
           console.log('start');
         }}
