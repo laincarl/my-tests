@@ -122,7 +122,7 @@ class Divider extends Component {
       const preHeight = this.getResizeHeight(differY, preProps.size, prePosition);
       const nextHeight = this.getResizeHeight(-differY, nextProps.size, nextPosition);
       const totalHeight = prePosition.height + nextPosition.height;
-      // console.log(totalHeight, preHeight, nextHeight);
+      console.log(totalHeight, preHeight, nextHeight);
       // 高度没有溢出再设置宽度
       if (preHeight + nextHeight === totalHeight) {
         if (preElement) {

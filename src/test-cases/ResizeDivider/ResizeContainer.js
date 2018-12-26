@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Divider from './Divider';
 import Section from './Section';
-// import withContext from '../../utils/withContext';
 import './ResizeContainer.css';
 
 const ResizerContext = React.createContext({});
@@ -11,26 +10,12 @@ class ResizeContainer extends Component {
     type: 'horizontal',
   }
 
-  componentDidMount() {
-    // this.AnalyzeChildren();
-    // const { type, test } = this.props;
-    // console.log(test);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // const { type, test } = this.props;
-    // console.log(test);
-  }
-
-  handleResize = () => {
-    console.log('resize');
-  }
 
   saveRef = name => (ref) => {
     this[name] = ref;
   }
 
-  AnalyzeChildren = () => {
+  renderChildren = () => {
     const children = React.Children.toArray(this.props.children);
     const newChildren = children.map((child, i) => {
       // console.log(child.type.displayName, child.type instanceof Divider);   
@@ -63,7 +48,7 @@ class ResizeContainer extends Component {
 
     return (
       <div className={`resize-divider-container resize-divider-container-${type}`}>
-        {this.AnalyzeChildren()}
+        {this.renderChildren()}
       </div>
     );
   }
