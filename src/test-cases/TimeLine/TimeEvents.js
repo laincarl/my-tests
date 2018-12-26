@@ -8,7 +8,7 @@ const Event = (props) => {
   const {
     preEvent, event, singleWidth, range,
   } = props;
-  const pre = preEvent || { fromDate: range.start, toDate: moment(range.start).subtract(1, 'days').endOf('day') };  
+  const pre = preEvent || { fromDate: range.start, toDate: moment(range.start).subtract(1, 'days').endOf('day') };
   const { fromDate, toDate, title } = event;
   const marginLeft = (moment(fromDate).diff(moment(pre.toDate), 'days')) * singleWidth;
   const tempRange = moment.range(fromDate, toDate);
@@ -24,7 +24,7 @@ const Event = (props) => {
         background: 'rgb(59, 127, 196)',
         color: 'white',
         cursor: 'pointer',
-        margin: 1,
+        padding: 1,
         width,
         marginLeft,
       }}
@@ -44,7 +44,7 @@ const Event = (props) => {
 const EventLine = (props) => {
   const { lineEvents, ...restProps } = props;
   return (
-    <div style={{ width: '100%', display: 'flex' }}>
+    <div style={{ width: '100%', display: 'flex', margin: '3px 0' }}>
       {
         lineEvents.map((event, i) => (
           <div>
@@ -58,16 +58,15 @@ const EventLine = (props) => {
 class TimeEvents extends Component {
   state = {
     events: [
-      [
-        {
-          fromDate: moment().startOf('month').add(5, 'days'),
-          toDate: moment().startOf('month').add(7, 'days').endOf('day'),
-          title: '自动化测试（前端）2',
-        }, {
-          fromDate: moment().startOf('month').add(9, 'days'),
-          toDate: moment().startOf('month').add(9, 'days').endOf('day'),
-          title: '自动化测试（前端）',
-        }],
+      [{
+        fromDate: moment().startOf('month').add(5, 'days'),
+        toDate: moment().startOf('month').add(6, 'days').endOf('day'),
+        title: '自动化测试（前端）2',
+      }, {
+        fromDate: moment().startOf('month').add(9, 'days'),
+        toDate: moment().startOf('month').add(13, 'days').endOf('day'),
+        title: '自动化测试（前端）',
+      }],
       [{
         fromDate: moment().startOf('month').add(5, 'days'),
         toDate: moment().startOf('month').add(7, 'days').endOf('day'),

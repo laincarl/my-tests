@@ -63,9 +63,11 @@ class TimeLine extends Component {
     const { singleWidth, currentDate, range } = this.state;
     // 向上舍入，因为时间点应该标记在时间的末尾
     const diffDay = Math.floor(pos / singleWidth);
-    console.log(pos, diffDay, singleWidth);
+    // console.log(pos, diffDay, singleWidth);
     const newCurrentDay = moment(range.start).add(diffDay, 'days');
-    if (currentDate !== newCurrentDay) {
+    
+    if (currentDate.isSame(newCurrentDay, 'day')) {
+      console.log('diff');
       this.setState({
         currentDate: newCurrentDay,
       });
@@ -85,7 +87,7 @@ class TimeLine extends Component {
   }
 
   handleMouseLeave = (e) => {
-    console.log('leave');
+    // console.log('leave');
     this.setState({
       pointing: false,
     });
