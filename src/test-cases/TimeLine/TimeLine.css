@@ -14,12 +14,15 @@
   position: relative;
 }
 
-.TimeLine-line-container {
-  /* height: 16px; */
+.fixed-line {
   width: 100%;
   bottom: 0;
   position: absolute;
-  /* padding-bottom: 80px; */
+}
+
+.TimeLine-line-container {
+  width: 100%;
+  position: relative;
 }
 
 .TimeLine-line {

@@ -5,8 +5,8 @@ import moment from 'moment';
 
 class TimeLineStore {
   @observable HeightLightDuring = {
-    start: moment().startOf('day'),
-    end: moment().endOf('day'),
+    start: null,
+    end: null,
   };
 
   @action setHeightLightDuring = (HeightLightDuring) => {

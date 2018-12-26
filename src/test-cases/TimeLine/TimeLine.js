@@ -72,19 +72,30 @@ class TimeLine extends Component {
     };
   }
 
+  /**
+   * 点击页面重设日期高亮
+   */
+  resetHeightDuring=() => {
+    TimeLineStore.setHeightLightDuring({});
+  }
+
   render() {
     const { singleWidth, range } = this.state;
-
     return (
-      <div className="TimeLine-container" ref={this.saveRef('container')}>         
-        <div style={{ height: 'calc(100% - 106px)', overflow: 'auto' }}>          
+      <div role="none" className="TimeLine-container" ref={this.saveRef('container')} onClick={this.resetHeightDuring}>         
+        <div style={{ height: 'calc(100% - 56px)', overflow: 'auto' }}>          
           <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
           <div className="TimeLine-content">
             {'content'}
-            <TimeEvents singleWidth={singleWidth} range={range} />            
+            <Line singleWidth={singleWidth} range={range} />
+            <TimeEvents singleWidth={singleWidth} range={range} />      
+            {/* <Line singleWidth={singleWidth} range={range} />       */}
           </div> 
-        </div>      
-        <Line singleWidth={singleWidth} range={range} />
+        </div>
+        <div className="fixed-line">
+          <Line singleWidth={singleWidth} range={range} /> 
+        </div>
+        
       </div>
     );
   }

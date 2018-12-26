@@ -28,7 +28,8 @@ const Event = (props) => {
         width,
         marginLeft,
       }}
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation();
         TimeLineStore.setHeightLightDuring({
           start: fromDate,
           end: toDate,

@@ -116,7 +116,7 @@ class Line extends Component {
             ))
           }
         </div>
-        <div style={{ height: 100 }}>
+        <div style={{ height: 50 }}>
           { 'content area' }
         </div>
       </div>
