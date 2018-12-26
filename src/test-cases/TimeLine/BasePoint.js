@@ -16,15 +16,7 @@ class BasePoint extends Component {
     const {
       color, left, reverse, content, contentShow, getPopupContainer,
     } = this.props;
-    const portal = (
-      <Portal
-        key="portal"
-        getContainer={this.getContainer}
-        didUpdate={this.handlePortalUpdate}
-      >
-        {this.getComponent()}
-      </Portal>
-    );
+
     return (
       <div
         className="Point"
@@ -48,7 +40,8 @@ class BasePoint extends Component {
               <Popover
                 content={content}
                 visible
-                // getPopupContainer={getPopupContainer}
+                placement="bottom"
+              // getPopupContainer={getPopupContainer}
               />
             )
           }
