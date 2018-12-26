@@ -6,22 +6,13 @@ import 'moment/locale/zh-cn';
 import { extendMoment } from 'moment-range';
 import './TimeLine.css';
 import { observer } from 'mobx-react';
-import Point from './Point';
-import BasePoint from './BasePoint';
 import TimeEvents from './TimeEvents';
 import TimeLineStore from './TimeLineStore';
+import Line from './Line';
 
 const moment = extendMoment(Moment);
 moment.locale('zh-cn');
-const MovePoint = props => (
-  <BasePoint
-    color="rgb(0, 101, 255)"
-    reverse
-    {...props}
-    content={moment(props.date).format('LL')}
-  />
 
-);
 @observer
 class TimeLine extends Component {
   constructor() {
@@ -31,14 +22,10 @@ class TimeLine extends Component {
     const range = moment.range(start, end);
     // 时间段数
     const days = range.diff('days') + 1;    
-    this.state = {
-      pointing: false,
-      left: 0,
-      currentDate: start,
+    this.state = {     
       range,
       days,
-      singleWidth: 0,
-      marks: [{ date: start.add(5, 'days'), title: ' 猪齿鱼1.0版本' }],
+      singleWidth: 0,     
     };
   }
 
@@ -48,7 +35,7 @@ class TimeLine extends Component {
 
   setSingleWidth = () => {
     const { days, singleWidth } = this.state;
-    const { width } = this.line.getBoundingClientRect();
+    const { width } = this.container.getBoundingClientRect();
     const newSingleWidth = Math.floor(width / days);
     this.container.style.width = `${newSingleWidth * days}px`;
     console.log(width, newSingleWidth);
@@ -59,61 +46,11 @@ class TimeLine extends Component {
     }
   }
 
-  setCurrentDate = (pos) => {
-    const { singleWidth, currentDate, range } = this.state;
-    // 向上舍入，因为时间点应该标记在时间的末尾
-    const diffDay = Math.floor(pos / singleWidth);
-    // console.log(pos, diffDay, singleWidth);
-    const newCurrentDay = moment(range.start).add(diffDay, 'days');
-    
-    if (currentDate.isSame(newCurrentDay, 'day')) {
-      console.log('diff');
-      this.setState({
-        currentDate: newCurrentDay,
-      });
-    }
-  }
-
-  handleMouseEnter = (e) => {
-    const { left } = this.line.getBoundingClientRect();
-    const pos = e.clientX - left;
-
-    this.setCurrentDate(e.clientX - left);
-    this.setState({
-      pointing: !this.pointingOther,
-      left: pos - 8,
-    });
-    document.addEventListener('mousemove', this.handleMouseMove);
-  }
-
-  handleMouseLeave = (e) => {
-    // console.log('leave');
-    this.setState({
-      pointing: false,
-    });
-    document.removeEventListener('mousemove', this.handleMouseMove);
-  }
-
-  handleMouseMove = (e) => {
-    const { left } = this.line.getBoundingClientRect();
-    const pos = e.clientX - left;
-    this.setCurrentDate(e.clientX - left);
-    // const hasMark = marks.some(mark => mark.isSame(currentDate, 'day'));
-    this.setState({
-      pointing: !this.pointingOther,
-      left: pos - 8,
-    });
-  }
 
   saveRef = name => (ref) => {
     this[name] = ref;
   }
 
-  calculateLeft = (date) => {
-    const { singleWidth, range } = this.state;
-    const tempRange = moment.range(moment(range.start), date);
-    return (tempRange.diff('days') + 1) * singleWidth;
-  }
 
   getHeightLightStyle = () => {
     const HeightLightDuring = TimeLineStore.getHeightLightDuring;
@@ -136,41 +73,19 @@ class TimeLine extends Component {
   }
 
   render() {
-    const {
-      pointing, left, currentDate, marks, singleWidth, days, range,
-    } = this.state;
+    const { singleWidth, range } = this.state;
 
     return (
-      <div className="TimeLine-container" ref={this.saveRef('container')}>
-        <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
-        <div className="TimeLine-content">
-          {'content'}
-          <TimeEvents singleWidth={singleWidth} range={range} />
-        </div>
-        {/* <div className="TimeLine-event-container" ref={this.saveRef('test')} /> */}
-        <div className="TimeLine-line-container">
-          <div className="TimeLine-line" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} ref={this.saveRef('line')}>
-            {pointing && <MovePoint left={left} date={currentDate} />}
-          </div>
-          <div>
-            {
-              marks.map(mark => (
-                <Point
-                  key={mark.title}
-                  left={this.calculateLeft(mark.date)}
-                  onMouseEnter={() => {
-                    this.pointingOther = true;
-                  }}
-                  onMouseLeave={() => {
-                    this.pointingOther = false;
-                  }}
-                  content={`${mark.date.format('LL')}-${mark.title}`}
-                />
-              ))
-            }
-          </div>
-        </div>
-
+      <div className="TimeLine-container" ref={this.saveRef('container')}>         
+        <div style={{ height: 200, overflow: 'auto' }}>          
+          <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
+          <div className="TimeLine-content">
+            {'content'}
+            <TimeEvents singleWidth={singleWidth} range={range} />
+            <div style={{ height: 1000, width: '100%' }} />
+          </div> 
+        </div>      
+        <Line singleWidth={singleWidth} range={range} />
       </div>
     );
   }
