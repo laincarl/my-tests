@@ -5,9 +5,10 @@ import { findDOMNode } from 'react-dom';
 import { extendMoment } from 'moment-range';
 import Point from './Point';
 import BasePoint from './BasePoint';
+import AlignBox from './AlignBox';
 
 const moment = extendMoment(Moment);
-
+const MOVE_COLOR = 'rgb(0, 101, 255)';
 class Line extends Component {
   constructor(props) {
     super(props);
@@ -86,6 +87,7 @@ class Line extends Component {
     const {
       pointing, left, currentDate, marks, singleWidth, days, range,
     } = this.state;
+    const { totalWidth } = this.props;    
     return (
       <div className="TimeLine-line-container">
         <div className="TimeLine-line" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} ref={this.saveRef('line')}>
@@ -102,7 +104,7 @@ class Line extends Component {
                 }}
                 onMouseLeave={() => {
                   this.pointingOther = false;
-                }}             
+                }}
               />
             ))
           }
@@ -111,27 +113,43 @@ class Line extends Component {
         <div style={{ height: 50 }}>
           <div>
             {
-            marks.map(mark => (
-              <span
-                key={mark.title}
-                style={{ left: this.calculateLeft(mark.date), position: 'absolute', transform: 'translateX(-50%)' }}               
-              >
-                {`${mark.date.format('LL')}-${mark.title}`}
-              </span>
-            ))
-          }
+              marks.map(mark => (
+                <AlignBox left={this.calculateLeft(mark.date)} totalWidth={totalWidth}>        
+                  <span
+                    key={mark.title}
+                    style={{
+                      display: 'inline-block',
+                      marginTop: 8,                   
+                      background: 'white',
+                    }}
+                  >
+                    {`${mark.date.format('LL')}-${mark.title}`}
+                  </span>      
+                </AlignBox>                
+              ))
+            }
           </div>
           {/* 实时滚动时间 */}
           <div>
             {pointing && (
-            <div 
-              style={{ left, position: 'absolute', transform: 'translateX(-50%)' }}
-            >
-              {moment(currentDate).format('LL')}
-            </div>
+              <AlignBox left={left} totalWidth={totalWidth}>        
+                <span
+                  style={{
+                    display: 'inline-block',
+                    marginTop: 8,
+                    // transform: 'translateX(-50%)',
+                    background: 'white',
+                    color: MOVE_COLOR,
+                    border: `1px solid ${MOVE_COLOR}`,
+                    borderRadius: 5,
+                  }}
+                >         
+                  {moment(currentDate).format('LL')}        
+                </span>             
+              </AlignBox>              
             )}
           </div>
-          { 'content area' }
+          {'content area'}
         </div>
       </div>
     );

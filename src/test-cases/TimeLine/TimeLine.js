@@ -25,7 +25,8 @@ class TimeLine extends Component {
     this.state = {     
       range,
       days,
-      singleWidth: 0,     
+      singleWidth: 0, 
+      totalWidth: 0,    
     };
   }
 
@@ -37,11 +38,13 @@ class TimeLine extends Component {
     const { days, singleWidth } = this.state;
     const { width } = this.container.getBoundingClientRect();
     const newSingleWidth = Math.floor(width / days);
-    this.container.style.width = `${newSingleWidth * days}px`;
+    const totalWidth = newSingleWidth * days;
+    this.container.style.width = `${totalWidth}px`;
     console.log(width, newSingleWidth);
     if (newSingleWidth !== singleWidth) {
       this.setState({
         singleWidth: newSingleWidth,
+        totalWidth,
       });
     }
   }
@@ -80,20 +83,21 @@ class TimeLine extends Component {
   }
 
   render() {
-    const { singleWidth, range } = this.state;
+    const { singleWidth, range, totalWidth } = this.state;
+    console.log(totalWidth);
     return (
       <div role="none" className="TimeLine-container" ref={this.saveRef('container')} onClick={this.resetHeightDuring}>         
         <div style={{ height: 'calc(100% - 56px)', overflow: 'auto' }}>          
           <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
           <div className="TimeLine-content">
             {'content'}
-            <Line singleWidth={singleWidth} range={range} />
+            <Line singleWidth={singleWidth} range={range} totalWidth={totalWidth} />
             <TimeEvents singleWidth={singleWidth} range={range} />      
             {/* <Line singleWidth={singleWidth} range={range} />       */}
           </div> 
         </div>
         <div className="fixed-line">
-          <Line singleWidth={singleWidth} range={range} /> 
+          <Line singleWidth={singleWidth} range={range} totalWidth={totalWidth} /> 
         </div>
         
       </div>
