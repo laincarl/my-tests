@@ -7,15 +7,7 @@ import Point from './Point';
 import BasePoint from './BasePoint';
 
 const moment = extendMoment(Moment);
-const MovePoint = props => (
-  <BasePoint
-    color="rgb(0, 101, 255)"
-    reverse
-    {...props}
-    content={moment(props.date).format('LL')}
-  />
 
-);
 class Line extends Component {
   constructor(props) {
     super(props);
@@ -97,7 +89,7 @@ class Line extends Component {
     return (
       <div className="TimeLine-line-container">
         <div className="TimeLine-line" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} ref={this.saveRef('line')}>
-          {pointing && <MovePoint ref left={left} date={currentDate} />}
+          {pointing && <BasePoint left={left} reverse color="rgb(0, 101, 255)" date={currentDate} />}
         </div>
         <div>
           {
@@ -110,13 +102,35 @@ class Line extends Component {
                 }}
                 onMouseLeave={() => {
                   this.pointingOther = false;
-                }}
-                content={`${mark.date.format('LL')}-${mark.title}`}
+                }}             
               />
             ))
           }
         </div>
+        {/* 内容区域 */}
         <div style={{ height: 50 }}>
+          <div>
+            {
+            marks.map(mark => (
+              <span
+                key={mark.title}
+                style={{ left: this.calculateLeft(mark.date), position: 'absolute', transform: 'translateX(-50%)' }}               
+              >
+                {`${mark.date.format('LL')}-${mark.title}`}
+              </span>
+            ))
+          }
+          </div>
+          {/* 实时滚动时间 */}
+          <div>
+            {pointing && (
+            <div 
+              style={{ left, position: 'absolute', transform: 'translateX(-50%)' }}
+            >
+              {moment(currentDate).format('LL')}
+            </div>
+            )}
+          </div>
           { 'content area' }
         </div>
       </div>

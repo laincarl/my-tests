@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Popover } from 'antd';
-import Portal from './Portal';
 
 class BasePoint extends Component {
   static defaultProps = {
-    contentShow: true,
+    
   }
 
   saveRef = name => (ref) => {
@@ -14,7 +11,7 @@ class BasePoint extends Component {
 
   render() {
     const {
-      color, left, reverse, content, contentShow, getPopupContainer,
+      color, left, reverse, 
     } = this.props;
 
     return (
@@ -34,18 +31,6 @@ class BasePoint extends Component {
             background: reverse ? 'white' : color,
           }}
         />
-        {/* <div className="Point-content">
-          {
-            contentShow && (
-              <Popover
-                content={content}
-                visible
-                placement="bottom"
-              // getPopupContainer={getPopupContainer}
-              />
-            )
-          }
-        </div> */}
       </div>
     );
   }
