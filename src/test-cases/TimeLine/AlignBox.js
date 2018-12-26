@@ -2,7 +2,7 @@
  * @Author: LainCarl 
  * @Date: 2018-12-26 17:47:28 
  * @Last Modified by: LainCarl
- * @Last Modified time: 2018-12-26 17:48:59
+ * @Last Modified time: 2018-12-26 18:07:44
  * @Feature: 保证点的描述渲染位置正确
  */
 
@@ -28,14 +28,16 @@ class AlignBox extends Component {
   }
 
   setLeft = () => {
-    const { totalWidth, left } = this.props;
-    const contentWidth = findDOMNode(this).offsetWidth;
+    const { left } = this.props;
+    const node = findDOMNode(this);
+    const contentWidth = node.offsetWidth;
+    // 父元素的宽度
+    const totalWidth = node.parentNode.offsetWidth;
     let finalLeft = left + 7; // 向左移动，抵消点的长度，居中
     finalLeft -= contentWidth / 2;// 向左移动，居中
     finalLeft = Math.max(0, finalLeft);// 保证向左不会超出父元素
-    finalLeft = Math.min(finalLeft, totalWidth - contentWidth);// 保证向右不会超出父元素
-    finalLeft = Math.round(finalLeft);
-    // console.log(this.state.left, finalLeft);
+    finalLeft = Math.min(finalLeft, totalWidth - contentWidth);// 保证向右不会超出父元素   
+    finalLeft = Math.round(finalLeft);   
     // 防止渲染死循环
     if (Math.abs(this.state.left - finalLeft) > 1) {
       this.setState({

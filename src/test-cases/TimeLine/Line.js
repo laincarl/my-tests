@@ -72,7 +72,7 @@ class Line extends Component {
     this.setCurrentDate(e.clientX - left);
     // const hasMark = marks.some(mark => mark.isSame(currentDate, 'day'));
     this.setState({
-      pointing: !this.pointingOther,
+      // pointing: !this.pointingOther,
       left: pos - 8,
     });
   }
@@ -87,7 +87,6 @@ class Line extends Component {
     const {
       pointing, left, currentDate, marks, singleWidth, days, range,
     } = this.state;
-    const { totalWidth } = this.props;    
     return (
       <div className="TimeLine-line-container">
         <div className="TimeLine-line" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} ref={this.saveRef('line')}>
@@ -114,7 +113,7 @@ class Line extends Component {
           <div>
             {
               marks.map(mark => (
-                <AlignBox left={this.calculateLeft(mark.date)} totalWidth={totalWidth}>        
+                <AlignBox left={this.calculateLeft(mark.date)}>        
                   <span
                     key={mark.title}
                     style={{
@@ -132,7 +131,7 @@ class Line extends Component {
           {/* 实时滚动时间 */}
           <div>
             {pointing && (
-              <AlignBox left={left} totalWidth={totalWidth}>        
+              <AlignBox left={left}>        
                 <span
                   style={{
                     display: 'inline-block',

@@ -25,8 +25,7 @@ class TimeLine extends Component {
     this.state = {     
       range,
       days,
-      singleWidth: 0, 
-      totalWidth: 0,    
+      singleWidth: 0,      
     };
   }
 
@@ -43,8 +42,7 @@ class TimeLine extends Component {
     console.log(width, newSingleWidth);
     if (newSingleWidth !== singleWidth) {
       this.setState({
-        singleWidth: newSingleWidth,
-        totalWidth,
+        singleWidth: newSingleWidth,      
       });
     }
   }
@@ -83,21 +81,20 @@ class TimeLine extends Component {
   }
 
   render() {
-    const { singleWidth, range, totalWidth } = this.state;
-    console.log(totalWidth);
+    const { singleWidth, range } = this.state;
     return (
       <div role="none" className="TimeLine-container" ref={this.saveRef('container')} onClick={this.resetHeightDuring}>         
         <div style={{ height: 'calc(100% - 56px)', overflow: 'auto' }}>          
           <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
           <div className="TimeLine-content">
             {'content'}
-            <Line singleWidth={singleWidth} range={range} totalWidth={totalWidth} />
+            <Line singleWidth={singleWidth} range={range} />
             <TimeEvents singleWidth={singleWidth} range={range} />      
             {/* <Line singleWidth={singleWidth} range={range} />       */}
           </div> 
         </div>
         <div className="fixed-line">
-          <Line singleWidth={singleWidth} range={range} totalWidth={totalWidth} /> 
+          <Line singleWidth={singleWidth} range={range} /> 
         </div>
         
       </div>
