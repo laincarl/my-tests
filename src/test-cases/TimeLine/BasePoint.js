@@ -34,7 +34,7 @@ class BasePoint extends Component {
             background: reverse ? 'white' : color,
           }}
         />
-        <div className="Point-content">
+        {/* <div className="Point-content">
           {
             contentShow && (
               <Popover
@@ -45,7 +45,7 @@ class BasePoint extends Component {
               />
             )
           }
-        </div>
+        </div> */}
       </div>
     );
   }

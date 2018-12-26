@@ -57,7 +57,7 @@ const EventLine = (props) => {
 };
 class TimeEvents extends Component {
   state = {
-    events: [
+    events: Array(20).fill(
       [{
         fromDate: moment().startOf('month').add(5, 'days'),
         toDate: moment().startOf('month').add(6, 'days').endOf('day'),
@@ -66,17 +66,8 @@ class TimeEvents extends Component {
         fromDate: moment().startOf('month').add(9, 'days'),
         toDate: moment().startOf('month').add(13, 'days').endOf('day'),
         title: '自动化测试（前端）',
-      }],
-      [{
-        fromDate: moment().startOf('month').add(5, 'days'),
-        toDate: moment().startOf('month').add(7, 'days').endOf('day'),
-        title: '自动化测试（前端）',
-      }, {
-        fromDate: moment().startOf('month').add(9, 'days'),
-        toDate: moment().startOf('month').add(9, 'days').endOf('day'),
-        title: '自动化测试（前端）',
-      }],
-    ],
+      }],      
+    ),
   }
 
   render() {

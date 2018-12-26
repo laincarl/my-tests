@@ -77,12 +77,11 @@ class TimeLine extends Component {
 
     return (
       <div className="TimeLine-container" ref={this.saveRef('container')}>         
-        <div style={{ height: 200, overflow: 'auto' }}>          
+        <div style={{ height: 'calc(100% - 106px)', overflow: 'auto' }}>          
           <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
           <div className="TimeLine-content">
             {'content'}
-            <TimeEvents singleWidth={singleWidth} range={range} />
-            <div style={{ height: 1000, width: '100%' }} />
+            <TimeEvents singleWidth={singleWidth} range={range} />            
           </div> 
         </div>      
         <Line singleWidth={singleWidth} range={range} />

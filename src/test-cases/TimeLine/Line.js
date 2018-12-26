@@ -47,7 +47,6 @@ class Line extends Component {
     const newCurrentDay = moment(range.start).add(diffDay, 'days');
 
     if (!moment(currentDate).isSame(newCurrentDay, 'day')) {
-      console.log('diff');
       this.setState({
         currentDate: newCurrentDay,
       });
@@ -98,7 +97,7 @@ class Line extends Component {
     return (
       <div className="TimeLine-line-container">
         <div className="TimeLine-line" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} ref={this.saveRef('line')}>
-          {pointing && <MovePoint left={left} date={currentDate} />}
+          {pointing && <MovePoint ref left={left} date={currentDate} />}
         </div>
         <div>
           {
@@ -116,6 +115,9 @@ class Line extends Component {
               />
             ))
           }
+        </div>
+        <div style={{ height: 100 }}>
+          { 'content area' }
         </div>
       </div>
     );
