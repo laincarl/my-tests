@@ -27,7 +27,7 @@ class Project extends Component {
       range,
       days,
       singleWidth: 0,
-     
+
     };
   }
 
@@ -58,7 +58,7 @@ class Project extends Component {
   getHeightLightStyle = () => {
     const HeightLightDuring = TimeLineStore.getHeightLightDuring;
     const {
-      start, end, offsetTop, proId, 
+      start, end, offsetTop, proId,
     } = HeightLightDuring;
     const { data } = this.props;
     const { id } = data;
@@ -114,16 +114,20 @@ class Project extends Component {
         {/* 中间数据区域 */}
         <div className="Project-content">
           <div className="Project-content-left">
-            <img src={icon} className="Project-icon" alt="" />
-            <div>{name}</div>
+            <div className="Project-content-left-content">
+              <img src={icon} className="Project-icon" alt="" />
+              <div>{name}</div>
+            </div>
           </div>
           <div className="Project-content-right" ref={this.saveRef('container')}>
             {/* 内容区域 */}
-            {
-              boards.map(board => <Board singleWidth={singleWidth} range={range} issues={board.issues} />)
-            }
-            <div className="HeightLightToday" style={this.getHeightLightTodayStyle()} />
-            <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
+            <div className="Project-content-right-board-area">
+              {
+                boards.map(board => <Board singleWidth={singleWidth} range={range} issues={board.issues} />)
+              }
+              <div className="HeightLightToday" style={this.getHeightLightTodayStyle()} />
+              <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
+            </div>
             {/* 时间轴区域 */}
             <div className="Project-content-right-time-line">
               <Line singleWidth={singleWidth} proId={id} range={range} HeightLightDuring={HeightLightDuring} />

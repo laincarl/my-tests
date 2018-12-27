@@ -15,13 +15,24 @@
     display: flex;
     position: relative;
     &-left {
-      width: 100px;
+      width: 100px;    
       background: rgb(244, 245, 247);
+      position: relative;
+      &-content {
+        position:absolute;
+        bottom: 37px;
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+      }
     }
     &-right {
       flex: 1;
       &-time-line {
         width: 100%;
+      }
+      &-board-area {
+        position: relative;
       }
     }
   }

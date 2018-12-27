@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import moment from 'moment';
 import Project from './Project';
+import TimeLineStore from './TimeLineStore';
 
 @observer
 class ShowProjects extends Component {
@@ -68,10 +69,17 @@ class ShowProjects extends Component {
     ],
   }
 
+  /**
+   * 点击页面重设日期高亮
+   */
+  resetHeightDuring = () => {
+    TimeLineStore.setHeightLightDuring({});
+  }
+
   render() {
     const { projects } = this.state;
     return (
-      <div style={{ height: '100%', overflow: 'auto' }}>
+      <div style={{ height: '100%', overflowX: 'hidden', overflowY: 'auto' }} onClick={this.resetHeightDuring} role="none">
         {projects.map(project => <Project data={project} />)}
       </div>
     );
