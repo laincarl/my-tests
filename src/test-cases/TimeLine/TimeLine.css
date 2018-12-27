@@ -24,7 +24,9 @@
   width: 100%;
   position: relative;
 }
-
+.TimeLine-content{
+  position: relative;
+}
 .TimeLine-line {
   height: 6px;
   width: 100%;

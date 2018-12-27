@@ -28,11 +28,13 @@ const Event = (props) => {
         width,
         marginLeft,
       }}
-      onClick={(e) => {
+      onClick={(e) => {    
+        const { offsetTop } = e.target;
         e.stopPropagation();
         TimeLineStore.setHeightLightDuring({
           start: fromDate,
           end: toDate,
+          offsetTop,
         });
       }}
     >

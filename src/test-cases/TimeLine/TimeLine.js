@@ -55,21 +55,24 @@ class TimeLine extends Component {
 
   getHeightLightStyle = () => {
     const HeightLightDuring = TimeLineStore.getHeightLightDuring;
-    const { start, end } = HeightLightDuring;
+    const { start, end, offsetTop } = HeightLightDuring;
     if (!start || !end) {
       return {};
     }
     const { range, singleWidth } = this.state;
     const marginLeft = moment(start).diff(moment(range.start), 'days') * singleWidth;   
-    const width = (moment(end).diff(moment(start), 'days') + 1) * singleWidth;    
+    const width = (moment(end).diff(moment(start), 'days') + 1) * singleWidth;
+    const top = offsetTop;    
     return {
       position: 'absolute',
-      height: 'calc(100% - 5px)',
+      // height: 'calc(100% - 5px)',
       pointerEvents: 'none',
       borderLeft: '1px dashed red',
-      borderRight: '1px dashed red',
+      borderRight: '1px dashed red', // rgb(76, 154, 255)
       marginLeft,
       width,
+      top,
+      bottom: 0,
     };
   }
 
@@ -84,19 +87,18 @@ class TimeLine extends Component {
     const { singleWidth, range } = this.state;
     return (
       <div role="none" className="TimeLine-container" ref={this.saveRef('container')} onClick={this.resetHeightDuring}>         
-        <div style={{ height: 'calc(100% - 56px)', overflow: 'auto' }}>          
-          <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
+        <div style={{ height: 'calc(100% - 56px)', overflowX: 'hidden', overflowY: 'auto' }}>          
+          {/* <div className="HeightLightDuring" style={this.getHeightLightStyle()} /> */}
           <div className="TimeLine-content">
             {'content'}
             <Line singleWidth={singleWidth} range={range} />
             <TimeEvents singleWidth={singleWidth} range={range} />      
-            {/* <Line singleWidth={singleWidth} range={range} />       */}
+            <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
           </div> 
         </div>
         <div className="fixed-line">
           <Line singleWidth={singleWidth} range={range} /> 
-        </div>
-        
+        </div>        
       </div>
     );
   }

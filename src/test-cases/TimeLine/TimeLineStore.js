@@ -7,6 +7,7 @@ class TimeLineStore {
   @observable HeightLightDuring = {
     start: null,
     end: null,
+    offsetTop: 0,
   };
 
   @action setHeightLightDuring = (HeightLightDuring) => {
