@@ -75,7 +75,7 @@ class TimeLine extends Component {
       bottom: 0,
     };
   }
-
+  
   getHeightLightTodayStyle = () => {
     const { range, singleWidth } = this.state;
     const marginLeft = moment().diff(moment(range.start), 'days') * singleWidth;
@@ -100,6 +100,7 @@ class TimeLine extends Component {
 
   render() {
     const { singleWidth, range } = this.state;
+    const HeightLightDuring = TimeLineStore.getHeightLightDuring;
     return (
       <div role="none" className="TimeLine-container" ref={this.saveRef('container')} onClick={this.resetHeightDuring}>
         <div style={{ height: 'calc(100% - 56px)', overflowX: 'hidden', overflowY: 'auto' }}>
@@ -113,7 +114,7 @@ class TimeLine extends Component {
           </div>
         </div>
         <div className="fixed-line">
-          <Line singleWidth={singleWidth} range={range} />
+          <Line singleWidth={singleWidth} range={range} HeightLightDuring={HeightLightDuring} />
         </div>
       </div>
     );

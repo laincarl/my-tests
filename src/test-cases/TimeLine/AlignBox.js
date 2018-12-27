@@ -17,6 +17,7 @@ class AlignBox extends Component {
 
   static defaultProps = {
     totalWidth: 0,
+    zIndex: 1,
   }
 
   componentDidMount() {
@@ -48,8 +49,12 @@ class AlignBox extends Component {
 
   render() {
     const { left } = this.state;
+    const { zIndex } = this.props;
     return (
-      <div style={{ display: 'inline-block', position: 'absolute', left }}>
+      <div style={{
+        display: 'inline-block', position: 'absolute', left, zIndex, 
+      }}
+      >
         {this.props.children}
       </div>
     );

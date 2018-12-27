@@ -49,15 +49,12 @@ class Line extends Component {
 
   handleMouseEnter = (e) => {
     const { activePoint } = this.state;
-    if (activePoint !== 'move') {
-      return;
-    }
     const { left } = this.line.getBoundingClientRect();
     const pos = e.clientX - left;
-    
+
     this.setCurrentDate(e.clientX - left);
     this.setState({
-      pointing: true,
+      pointing: activePoint === 'move',
       left: pos,
     });
     document.addEventListener('mousemove', this.handleMouseMove);
@@ -72,10 +69,10 @@ class Line extends Component {
   }
 
   handleMouseMove = (e) => {
-    const { activePoint } = this.state;   
+    const { activePoint } = this.state;
     const { left } = this.line.getBoundingClientRect();
     const pos = e.clientX - left;
-    this.setCurrentDate(e.clientX - left); 
+    this.setCurrentDate(e.clientX - left);
     this.setState({
       pointing: activePoint === 'move',
       left: pos,
@@ -88,10 +85,53 @@ class Line extends Component {
     return (tempRange.diff('days') + 1) * singleWidth;
   }
 
+  renderHeightLightDuring = () => {
+    const { HeightLightDuring } = this.props;
+    const { start, end, offsetTop } = HeightLightDuring || {};
+    if (!start || !end) {
+      return null;
+    }
+    const { singleWidth, range } = this.state;
+    const startLeft = moment(start).diff(moment(range.start), 'days') * singleWidth;
+    const width = (moment(end).diff(moment(start), 'days') + 1) * singleWidth;
+    const endLeft = startLeft + width;
+    return [
+      <AlignBox left={startLeft}>
+        <span
+          style={{
+            display: 'inline-block',
+            marginTop: 8,
+            background: 'white',
+            color: MOVE_COLOR,
+            border: `1px solid ${MOVE_COLOR}`,
+            borderRadius: 5,
+          }}
+        >
+          {moment(start).format('LL')}
+        </span>
+      </AlignBox>,
+      <AlignBox left={endLeft}>
+        <span
+          style={{
+            display: 'inline-block',
+            marginTop: 8,
+            background: 'white',
+            color: MOVE_COLOR,
+            border: `1px solid ${MOVE_COLOR}`,
+            borderRadius: 5,
+          }}
+        >
+          {moment(end).format('LL')}
+        </span>
+      </AlignBox>,
+    ];
+  }
+
   render() {
     const {
       pointing, left, currentDate, marks, singleWidth, days, range, activePoint,
     } = this.state;
+
     return (
       <div className="TimeLine-line-container">
         <div className="TimeLine-line" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} ref={this.saveRef('line')}>
@@ -105,13 +145,13 @@ class Line extends Component {
             onMouseEnter={() => {
               this.setState({
                 activePoint: 'start',
-              });              
+              });
             }}
             onMouseLeave={() => {
               this.setState({
                 activePoint: 'move',
               });
-            }} 
+            }}
           />
         </div>
         {/* 轴上的标记点 */}
@@ -124,13 +164,13 @@ class Line extends Component {
                 onMouseEnter={() => {
                   this.setState({
                     activePoint: mark.key,
-                  });              
+                  });
                 }}
-                onMouseLeave={() => {
+                onMouseLeave={() => {                 
                   this.setState({
                     activePoint: 'move',
                   });
-                }} 
+                }}
               />
             ))
           }
@@ -138,44 +178,44 @@ class Line extends Component {
         {/* 内容区域 */}
         <div style={{ height: 50 }}>
           {/* 开始时间 */}
-          <AlignBox left={0}>        
+          <AlignBox left={0}>
             <span
               style={{
                 display: 'inline-block',
-                marginTop: 8,                
+                marginTop: 8,
                 background: 'white',
                 color: 'gray',
-                border: activePoint === 'start' && '1px solid gray',                
+                border: activePoint === 'start' && '1px solid gray',
                 borderRadius: 5,
               }}
-            >         
-              {`${moment().format('LL')}-开始`}        
-            </span>             
+            >
+              {`${moment().format('LL')}-开始`}
+            </span>
           </AlignBox>
           <div>
             {
               marks.map(mark => (
-                <AlignBox left={this.calculateLeft(mark.date)}>        
+                <AlignBox left={this.calculateLeft(mark.date)}>
                   <span
                     key={mark.title}
                     style={{
                       display: 'inline-block',
-                      marginTop: 8,                   
+                      marginTop: 8,
                       background: 'white',
                       color: 'rgb(54, 179, 126)',
-                      border: activePoint === mark.key && '1px solid rgb(54, 179, 126)',    
+                      border: activePoint === mark.key && '1px solid rgb(54, 179, 126)',
                     }}
                   >
                     {`${mark.date.format('LL')}-${mark.title}`}
-                  </span>      
-                </AlignBox>                
+                  </span>
+                </AlignBox>
               ))
             }
           </div>
           {/* 实时滚动时间 */}
           <div>
             {pointing && (
-              <AlignBox left={left}>        
+              <AlignBox left={left} zIndex={6}>
                 <span
                   style={{
                     display: 'inline-block',
@@ -186,12 +226,15 @@ class Line extends Component {
                     border: `1px solid ${MOVE_COLOR}`,
                     borderRadius: 5,
                   }}
-                >         
-                  {moment(currentDate).format('LL')}        
-                </span>             
-              </AlignBox>              
+                >
+                  {moment(currentDate).format('LL')}
+                </span>
+              </AlignBox>
             )}
-          </div>       
+          </div>
+          <div>
+            {this.renderHeightLightDuring()}
+          </div>
         </div>
       </div>
     );
