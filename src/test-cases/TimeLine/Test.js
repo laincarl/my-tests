@@ -11,10 +11,12 @@ class Test extends Component {
         <ResizeContainer type="vertical">
           <Section size={{
             height: 500,
-            minHeight: 50,
+            minHeight: 250,
           }}
           >
-            <TimeLine />
+            <div style={{ padding: 20, height: '100%' }}>
+              <TimeLine />
+            </div>
           </Section>
           <Divider />
           <Section size={{
@@ -22,7 +24,7 @@ class Test extends Component {
             minHeight: 50,
           }}
           >
-            <div style={{ flex: 1, background: 'bisque', height: '100%' }}>
+            <div style={{ flex: 1, height: '100%' }}>
               bottom
             </div>
           </Section>          

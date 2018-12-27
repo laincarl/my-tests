@@ -39,7 +39,7 @@ class TimeLine extends Component {
     const newSingleWidth = Math.floor(width / days);
     const totalWidth = newSingleWidth * days;
     this.container.style.width = `${totalWidth}px`;
-    console.log(width, newSingleWidth);
+    // console.log(width, newSingleWidth);
     if (newSingleWidth !== singleWidth) {
       this.setState({
         singleWidth: newSingleWidth,

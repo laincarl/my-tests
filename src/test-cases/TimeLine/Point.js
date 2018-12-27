@@ -1,53 +1,45 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import BasePoint from './BasePoint';
 
 class Point extends Component {
-  state = {
-    pointing: false,
-    color: 'rgb(54, 179, 126)',
-
+  static defaultProps = {
+    size: 'medium',
   }
 
-  handleMouseEnter = (e) => {
-    // e.stopPropagation();
-    // e.preventDefault();
-    this.setState({
-      pointing: true,
-    });
-    if (this.props.onMouseEnter) {
-      this.props.onMouseEnter();
-    }
-  }
-
-  handleMouseLeave = (e) => {
-    // e.stopPropagation();
-    // e.preventDefault();
-    this.setState({
-      pointing: false,
-    });
-    if (this.props.onMouseLeave) {
-      this.props.onMouseLeave();
-    }
+  saveRef = name => (ref) => {
+    this[name] = ref;
   }
 
   render() {
-    const { pointing, color } = this.state;
+    const {
+      color, left, reverse, size, 
+    } = this.props;
+
     return (
-      <BasePoint        
+      <div
+        className="Point"
+        ref={this.saveRef('Point')}
         {...this.props}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-        color={color}
-        reverse={pointing}
-        // contentShow={pointing}        
-      />      
+        style={{
+          background: reverse ? color : 'white',
+          left: left || 0,
+          transform: size === 'small' && 'scale(0.6)',
+          ...this.props.style,
+        }}
+      >
+        <div
+          className="Point-inner"
+          style={{
+            background: reverse ? 'white' : color,
+          }}
+        />
+      </div>
     );
   }
 }
 
 Point.propTypes = {
-
+  size: PropTypes.oneOf(['small', 'medium']),
 };
 
 export default Point;
