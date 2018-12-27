@@ -61,7 +61,7 @@ class Line extends Component {
   }
 
   handleMouseLeave = (e) => {
-    // console.log('leave');
+    console.log('leave');
     this.setState({
       pointing: false,
     });
@@ -70,8 +70,8 @@ class Line extends Component {
 
   handleMouseMove = (e) => {
     const { activePoint } = this.state;
-    const { left } = this.line.getBoundingClientRect();
-    const pos = e.clientX - left;
+    const { left, width } = this.line.getBoundingClientRect();
+    const pos = Math.min(e.clientX - left, width - 8); // 保证向右，不会超出
     this.setCurrentDate(e.clientX - left);
     this.setState({
       pointing: activePoint === 'move',

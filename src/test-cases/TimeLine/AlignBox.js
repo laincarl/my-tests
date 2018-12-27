@@ -31,7 +31,7 @@ class AlignBox extends Component {
   setLeft = () => {
     const { left } = this.props;
     const node = findDOMNode(this);
-    const contentWidth = node.offsetWidth;
+    const contentWidth = node.offsetWidth + 2;
     // 父元素的宽度
     const totalWidth = node.parentNode.offsetWidth;
     let finalLeft = left; 
