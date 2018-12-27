@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class BasePoint extends Component {
   static defaultProps = {
-    
+    size: 'medium',
   }
 
   saveRef = name => (ref) => {
@@ -11,7 +11,7 @@ class BasePoint extends Component {
 
   render() {
     const {
-      color, left, reverse, 
+      color, left, reverse, size, 
     } = this.props;
 
     return (
@@ -22,6 +22,7 @@ class BasePoint extends Component {
         style={{
           background: reverse ? color : 'white',
           left: left || 0,
+          transform: size === 'small' && 'scale(0.6)',
           ...this.props.style,
         }}
       >

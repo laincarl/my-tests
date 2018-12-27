@@ -21,11 +21,11 @@ class TimeLine extends Component {
     const end = moment().endOf('month');
     const range = moment.range(start, end);
     // 时间段数
-    const days = range.diff('days') + 1;    
-    this.state = {     
+    const days = range.diff('days') + 1;
+    this.state = {
       range,
       days,
-      singleWidth: 0,      
+      singleWidth: 0,
     };
   }
 
@@ -42,7 +42,7 @@ class TimeLine extends Component {
     console.log(width, newSingleWidth);
     if (newSingleWidth !== singleWidth) {
       this.setState({
-        singleWidth: newSingleWidth,      
+        singleWidth: newSingleWidth,
       });
     }
   }
@@ -60,9 +60,9 @@ class TimeLine extends Component {
       return {};
     }
     const { range, singleWidth } = this.state;
-    const marginLeft = moment(start).diff(moment(range.start), 'days') * singleWidth;   
+    const marginLeft = moment(start).diff(moment(range.start), 'days') * singleWidth;
     const width = (moment(end).diff(moment(start), 'days') + 1) * singleWidth;
-    const top = offsetTop;    
+    const top = offsetTop;
     return {
       position: 'absolute',
       // height: 'calc(100% - 5px)',
@@ -76,29 +76,45 @@ class TimeLine extends Component {
     };
   }
 
+  getHeightLightTodayStyle = () => {
+    const { range, singleWidth } = this.state;
+    const marginLeft = moment().diff(moment(range.start), 'days') * singleWidth;
+
+    return {
+      position: 'absolute',
+      pointerEvents: 'none',
+      borderLeft: '1px dashed orange',
+      marginLeft,
+      width: 0,
+      top: 0,
+      bottom: 0,
+    };
+  }
+
   /**
    * 点击页面重设日期高亮
    */
-  resetHeightDuring=() => {
+  resetHeightDuring = () => {
     TimeLineStore.setHeightLightDuring({});
   }
 
   render() {
     const { singleWidth, range } = this.state;
     return (
-      <div role="none" className="TimeLine-container" ref={this.saveRef('container')} onClick={this.resetHeightDuring}>         
-        <div style={{ height: 'calc(100% - 56px)', overflowX: 'hidden', overflowY: 'auto' }}>          
+      <div role="none" className="TimeLine-container" ref={this.saveRef('container')} onClick={this.resetHeightDuring}>
+        <div style={{ height: 'calc(100% - 56px)', overflowX: 'hidden', overflowY: 'auto' }}>
           {/* <div className="HeightLightDuring" style={this.getHeightLightStyle()} /> */}
           <div className="TimeLine-content">
             {'content'}
             <Line singleWidth={singleWidth} range={range} />
-            <TimeEvents singleWidth={singleWidth} range={range} />      
+            <TimeEvents singleWidth={singleWidth} range={range} />
+            <div className="HeightLightToday" style={this.getHeightLightTodayStyle()} />
             <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
-          </div> 
+          </div>
         </div>
         <div className="fixed-line">
-          <Line singleWidth={singleWidth} range={range} /> 
-        </div>        
+          <Line singleWidth={singleWidth} range={range} />
+        </div>
       </div>
     );
   }

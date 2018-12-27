@@ -80,7 +80,7 @@ class Line extends Component {
   calculateLeft = (date) => {
     const { singleWidth, range } = this.state;
     const tempRange = moment.range(moment(range.start), date);
-    return (tempRange.diff('days') + 1) * singleWidth;
+    return (tempRange.diff('days') + 1) * singleWidth - 8;
   }
 
   render() {
@@ -91,6 +91,8 @@ class Line extends Component {
       <div className="TimeLine-line-container">
         <div className="TimeLine-line" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} ref={this.saveRef('line')}>
           {pointing && <BasePoint left={left} reverse color="rgb(0, 101, 255)" date={currentDate} />}
+          {/* 当前时间点 */}
+          <BasePoint size="small" color="orange" reverse left={this.calculateLeft(moment().subtract(1, 'days'))} />
         </div>
         <div>
           {
