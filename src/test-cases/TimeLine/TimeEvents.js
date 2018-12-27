@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Tooltip } from 'antd';
+import { observer } from 'mobx-react';
 import TimeLineStore from './TimeLineStore';
 
 const Event = (props) => {

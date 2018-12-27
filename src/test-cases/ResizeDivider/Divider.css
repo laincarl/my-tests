@@ -32,6 +32,7 @@
   content: "";
   display: block;
   position: absolute;
+  background: white;
 }
 
 .Divider.vertical:before {

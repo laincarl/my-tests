@@ -61,7 +61,7 @@ class Line extends Component {
   }
 
   handleMouseLeave = (e) => {
-    console.log('leave');
+    // console.log('leave');
     this.setState({
       pointing: false,
     });

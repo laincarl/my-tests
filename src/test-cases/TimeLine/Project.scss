@@ -1,0 +1,28 @@
+.Project {
+  &-title {
+    display: flex;
+  }
+  &-icon {
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+  }
+  &-content {
+    // margin-left: 100px;
+    // width: calc(100% - 100px);
+  }
+  &-content {
+    display: flex;
+    position: relative;
+    &-left {
+      width: 100px;
+      background: rgb(244, 245, 247);
+    }
+    &-right {
+      flex: 1;
+      &-time-line {
+        width: 100%;
+      }
+    }
+  }
+}

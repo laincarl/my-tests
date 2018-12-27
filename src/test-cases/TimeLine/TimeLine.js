@@ -102,19 +102,25 @@ class TimeLine extends Component {
     const { singleWidth, range } = this.state;
     const HeightLightDuring = TimeLineStore.getHeightLightDuring;
     return (
-      <div role="none" className="TimeLine-container" ref={this.saveRef('container')} onClick={this.resetHeightDuring}>
-        <div style={{ height: 'calc(100% - 56px)', overflowX: 'hidden', overflowY: 'auto' }}>
-          {/* <div className="HeightLightDuring" style={this.getHeightLightStyle()} /> */}
-          <div className="TimeLine-content">
-            {'content'}
-            <Line singleWidth={singleWidth} range={range} />
-            <TimeEvents singleWidth={singleWidth} range={range} />
-            <div className="HeightLightToday" style={this.getHeightLightTodayStyle()} />
-            <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
-          </div>
+      <div style={{ height: '100%', display: 'flex' }}>
+        {/*  */}
+        <div>
+          {'sss'}
         </div>
-        <div className="fixed-line">
-          <Line singleWidth={singleWidth} range={range} HeightLightDuring={HeightLightDuring} />
+        <div role="none" className="TimeLine-container" ref={this.saveRef('container')} onClick={this.resetHeightDuring}>
+          <div style={{ height: 'calc(100% - 56px)', overflowX: 'hidden', overflowY: 'auto' }}>
+            {/* <div className="HeightLightDuring" style={this.getHeightLightStyle()} /> */}
+            <div className="TimeLine-content">
+              {'content'}
+              <Line singleWidth={singleWidth} range={range} />
+              <TimeEvents singleWidth={singleWidth} range={range} />
+              <div className="HeightLightToday" style={this.getHeightLightTodayStyle()} />
+              <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
+            </div>
+          </div>
+          <div className="fixed-line">
+            <Line singleWidth={singleWidth} range={range} HeightLightDuring={HeightLightDuring} />
+          </div>
         </div>
       </div>
     );
