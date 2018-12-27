@@ -53,7 +53,7 @@ class Line extends Component {
     this.setCurrentDate(e.clientX - left);
     this.setState({
       pointing: !this.pointingOther,
-      left: pos - 8,
+      left: pos,
     });
     document.addEventListener('mousemove', this.handleMouseMove);
   }
@@ -73,14 +73,14 @@ class Line extends Component {
     // const hasMark = marks.some(mark => mark.isSame(currentDate, 'day'));
     this.setState({
       // pointing: !this.pointingOther,
-      left: pos - 8,
+      left: pos,
     });
   }
 
   calculateLeft = (date) => {
     const { singleWidth, range } = this.state;
     const tempRange = moment.range(moment(range.start), date);
-    return (tempRange.diff('days') + 1) * singleWidth - 8;
+    return (tempRange.diff('days') + 1) * singleWidth;
   }
 
   render() {

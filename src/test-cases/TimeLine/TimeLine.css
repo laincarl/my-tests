@@ -39,8 +39,9 @@
   box-sizing: content-box;
   top: -6px;
   /* transform: translateY(-50%); */
-  width: 15px;
-  height: 15px;
+  margin-left: -8px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   position: absolute;
   cursor: pointer;
