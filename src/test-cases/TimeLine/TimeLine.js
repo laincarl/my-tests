@@ -4,7 +4,7 @@ import Moment from 'moment';
 import { findDOMNode } from 'react-dom';
 import 'moment/locale/zh-cn';
 import { extendMoment } from 'moment-range';
-import './TimeLine.css';
+import './TimeLine.scss';
 import { observer } from 'mobx-react';
 import TimeEvents from './TimeEvents';
 import TimeLineStore from './TimeLineStore';
