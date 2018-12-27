@@ -13,7 +13,7 @@ class Event extends Component {
     } = this.props;
     const pre = preEvent || { fromDate: range.start, toDate: moment(range.start).subtract(1, 'days').endOf('day') };
     const {
-      fromDate, toDate, title, id,
+      fromDate, toDate, title, id, proId,
     } = event;
     const marginLeft = (moment(fromDate).diff(moment(pre.toDate), 'days')) * singleWidth;
     const tempRange = moment.range(fromDate, toDate);
@@ -43,6 +43,7 @@ class Event extends Component {
             end: toDate,
             offsetTop,
             id,
+            proId,
           });
         }}
       >
@@ -71,26 +72,11 @@ const EventLine = (props) => {
 };
 @observer
 class TargetSchedule extends Component {
-  state = {
-    events: Array(20).fill(0).map((c, t) => [{
-      id: `${t}_1`,
-      fromDate: moment().startOf('month').add(5, 'days'),
-      toDate: moment().startOf('month').add(6, 'days').endOf('day'),
-      title: '自动化测试（前端）2',
-    }, {
-      id: `${t}_2`,
-      fromDate: moment().startOf('month').add(9, 'days'),
-      toDate: moment().startOf('month').add(13, 'days').endOf('day'),
-      title: '自动化测试（前端）',
-    }]),
-  }
-
   render() {
-    const { events } = this.state;
-    const { ...restProps } = this.props;
+    const { issues, ...restProps } = this.props;
     return (
       <div style={{ width: '100%' }}>
-        {events.map(lineEvents => <EventLine lineEvents={lineEvents} {...restProps} />)}
+        {issues.map(lineEvents => <EventLine lineEvents={lineEvents} {...restProps} />)}
       </div>
     );
   }

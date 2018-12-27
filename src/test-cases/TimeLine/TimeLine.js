@@ -6,7 +6,7 @@ import 'moment/locale/zh-cn';
 import { extendMoment } from 'moment-range';
 import './TimeLine.scss';
 import { observer } from 'mobx-react';
-import TimeEvents from './TimeEvents';
+// import TimeEvents from './TimeEvents';
 import TimeLineStore from './TimeLineStore';
 import Line from './Line';
 
@@ -113,7 +113,7 @@ class TimeLine extends Component {
             <div className="TimeLine-content">
               {'content'}
               <Line singleWidth={singleWidth} range={range} />
-              <TimeEvents singleWidth={singleWidth} range={range} />
+              {/* <TimeEvents singleWidth={singleWidth} range={range} /> */}
               <div className="HeightLightToday" style={this.getHeightLightTodayStyle()} />
               <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
             </div>

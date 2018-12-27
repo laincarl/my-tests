@@ -6,7 +6,6 @@ import 'moment/locale/zh-cn';
 import { extendMoment } from 'moment-range';
 import './TimeLine.scss';
 import { observer } from 'mobx-react';
-import TimeEvents from './TimeEvents';
 import TimeLineStore from './TimeLineStore';
 import Line from './Line';
 import './Project.scss';
@@ -28,6 +27,7 @@ class Project extends Component {
       range,
       days,
       singleWidth: 0,
+     
     };
   }
 
@@ -57,8 +57,12 @@ class Project extends Component {
 
   getHeightLightStyle = () => {
     const HeightLightDuring = TimeLineStore.getHeightLightDuring;
-    const { start, end, offsetTop } = HeightLightDuring;
-    if (!start || !end) {
+    const {
+      start, end, offsetTop, proId, 
+    } = HeightLightDuring;
+    const { data } = this.props;
+    const { id } = data;
+    if (!start || !end || id !== proId) {
       return {};
     }
     const { range, singleWidth } = this.state;
@@ -104,7 +108,7 @@ class Project extends Component {
     const { singleWidth, range } = this.state;
     const HeightLightDuring = TimeLineStore.getHeightLightDuring;
     const { data } = this.props;
-    const { name } = data;
+    const { name, boards, id } = data;
     return (
       <div className="Project">
         {/* 中间数据区域 */}
@@ -115,12 +119,14 @@ class Project extends Component {
           </div>
           <div className="Project-content-right" ref={this.saveRef('container')}>
             {/* 内容区域 */}
-            <Board singleWidth={singleWidth} range={range} />
+            {
+              boards.map(board => <Board singleWidth={singleWidth} range={range} issues={board.issues} />)
+            }
             <div className="HeightLightToday" style={this.getHeightLightTodayStyle()} />
             <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
             {/* 时间轴区域 */}
             <div className="Project-content-right-time-line">
-              <Line singleWidth={singleWidth} range={range} HeightLightDuring={HeightLightDuring} />
+              <Line singleWidth={singleWidth} proId={id} range={range} HeightLightDuring={HeightLightDuring} />
             </div>
           </div>
         </div>

@@ -86,9 +86,10 @@ class Line extends Component {
   }
 
   renderHeightLightDuring = () => {
-    const { HeightLightDuring } = this.props;
+    const { HeightLightDuring, proId } = this.props;
+
     const { start, end, offsetTop } = HeightLightDuring || {};
-    if (!start || !end) {
+    if (!start || !end || proId !== HeightLightDuring.proId) {
       return null;
     }
     const { singleWidth, range } = this.state;
