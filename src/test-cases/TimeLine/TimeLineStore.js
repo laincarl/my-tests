@@ -10,12 +10,28 @@ class TimeLineStore {
     offsetTop: 0,
   };
 
+  @observable StickData = {
+    singleWidth: 0,
+    proId: null,
+    range: { start: null, end: null },
+    HeightLightDuring: {},  
+    marks: [],
+  };
+
   @action setHeightLightDuring = (HeightLightDuring) => {
     this.HeightLightDuring = HeightLightDuring;
   }
 
+  @action setStickData = (StickData) => {
+    this.StickData = StickData;
+  }
+
   @computed get getHeightLightDuring() {
-    return toJS(this.HeightLightDuring);
+    return toJS(this.StickData);
+  }
+
+  @computed get getStickData() {
+    return toJS(this.StickData);
   }
 }
 

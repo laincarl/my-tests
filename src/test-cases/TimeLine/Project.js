@@ -14,6 +14,10 @@ import Board from './Board';
 
 const moment = extendMoment(Moment);
 moment.locale('zh-cn');
+function rnd(n, m) {
+  const random = Math.floor(Math.random() * (m - n + 1) + n);
+  return random;
+}
 @observer
 class Project extends Component {
   constructor() {
@@ -27,7 +31,6 @@ class Project extends Component {
       range,
       days,
       singleWidth: 0,
-
     };
   }
 
@@ -51,6 +54,9 @@ class Project extends Component {
 
 
   saveRef = name => (ref) => {
+    if (name === 'line' && this.props.saveTimeLineRef) {
+      this.props.saveTimeLineRef(ref);
+    }    
     this[name] = ref;
   }
 
@@ -109,6 +115,7 @@ class Project extends Component {
     const HeightLightDuring = TimeLineStore.getHeightLightDuring;
     const { data } = this.props;
     const { name, boards, id } = data;
+    const marks = [{ key: 'plan_1', date: moment().startOf('month').add(rnd(2, 20), 'days'), title: ' 猪齿鱼1.0版本' }];
     return (
       <div className="Project">
         {/* 中间数据区域 */}
@@ -130,7 +137,7 @@ class Project extends Component {
             </div>
             {/* 时间轴区域 */}
             <div className="Project-content-right-time-line">
-              <Line singleWidth={singleWidth} proId={id} range={range} HeightLightDuring={HeightLightDuring} />
+              <Line singleWidth={singleWidth} proId={id} range={range} HeightLightDuring={HeightLightDuring} marks={marks} ref={this.saveRef('line')} />
             </div>
           </div>
         </div>

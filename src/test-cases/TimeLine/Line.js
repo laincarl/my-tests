@@ -6,9 +6,11 @@ import { extendMoment } from 'moment-range';
 import HoverPoint from './HoverPoint';
 import Point from './Point';
 import AlignBox from './AlignBox';
+import TimeLineStore from './TimeLineStore';
 
 const moment = extendMoment(Moment);
 const MOVE_COLOR = 'rgb(0, 101, 255)';
+
 class Line extends Component {
   constructor(props) {
     super(props);
@@ -16,25 +18,33 @@ class Line extends Component {
       pointing: false,
       left: 0,
       currentDate: props.range.start,
-      singleWidth: 0,
-      marks: [{ key: 'plan_1', date: moment().startOf('month').add(15, 'days'), title: ' 猪齿鱼1.0版本' }],
+      // singleWidth: 0,      
       activePoint: 'move',
     };
   }
 
   static getDerivedStateFromProps(props, state) {
     const { singleWidth, range } = props;
-    return {
-      singleWidth, range,
-    };
+    return { currentDate: range.start };
   }
 
   saveRef = name => (ref) => {
     this[name] = ref;
   }
 
+  setStick = () => {
+    const {
+      singleWidth, proId, range, HeightLightDuring, marks,
+    } = this.props;
+
+    TimeLineStore.setStickData({
+      singleWidth, proId, range, HeightLightDuring, marks,
+    });
+  }
+
   setCurrentDate = (pos) => {
-    const { singleWidth, currentDate, range } = this.state;
+    const { currentDate } = this.state;
+    const { singleWidth, range } = this.props;
     // 向上舍入，因为时间点应该标记在时间的末尾
     const diffDay = Math.floor(pos / singleWidth);
     // console.log(pos, diffDay, singleWidth);
@@ -80,7 +90,7 @@ class Line extends Component {
   }
 
   calculateLeft = (date) => {
-    const { singleWidth, range } = this.state;
+    const { singleWidth, range } = this.props;
     const tempRange = moment.range(moment(range.start), date);
     return (tempRange.diff('days') + 1) * singleWidth;
   }
@@ -92,7 +102,7 @@ class Line extends Component {
     if (!start || !end || proId !== HeightLightDuring.proId) {
       return null;
     }
-    const { singleWidth, range } = this.state;
+    const { singleWidth, range } = this.props;
     const startLeft = moment(start).diff(moment(range.start), 'days') * singleWidth;
     const width = (moment(end).diff(moment(start), 'days') + 1) * singleWidth;
     const endLeft = startLeft + width;
@@ -130,9 +140,9 @@ class Line extends Component {
 
   render() {
     const {
-      pointing, left, currentDate, marks, singleWidth, days, range, activePoint,
+      pointing, left, currentDate, activePoint,
     } = this.state;
-
+    const { marks } = this.props;
     return (
       <div className="TimeLine-line-container">
         <div className="TimeLine-line" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} ref={this.saveRef('line')}>
@@ -167,7 +177,7 @@ class Line extends Component {
                     activePoint: mark.key,
                   });
                 }}
-                onMouseLeave={() => {                 
+                onMouseLeave={() => {
                   this.setState({
                     activePoint: 'move',
                   });
