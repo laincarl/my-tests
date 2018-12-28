@@ -35,16 +35,18 @@ class Test extends Component {
           </Section>
           <Divider />
           <Section size={{
-            height: 120,
+            height: 500,
             minHeight: 50,
           }}
           >
-            <div style={{ flex: 1, height: '100%' }}>
-              bottom
+            <div style={{
+              flex: 1, height: '100%',
+            }}
+            >
+              {'bottom'}
             </div>
           </Section>          
         </ResizeContainer>
-        
       </div>
     );
   }

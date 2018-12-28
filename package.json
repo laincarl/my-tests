@@ -24,6 +24,7 @@
     "dependencies": {
         "antd": "^3.5.4",
         "antd-table-infinity": "^1.1.1",
+        "babel-loader": "^8.0.4",
         "dom-to-image": "^2.6.0",
         "history": "^4.7.2",
         "immutability-helper": "^2.7.1",
