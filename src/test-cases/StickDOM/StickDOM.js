@@ -47,11 +47,7 @@ export class StickDOM extends Component {
               ))}
             </div>
           )}
-        </Stickyard>
-        <div style={{ height: 100, overflow: 'auto', position: 'relative' }} onScroll={this.handleScroll}>
-          <div style={{ height: 100, width: '100%', background: 'red' }} ref={ss => this.ss = ss}>ss</div>
-          <div style={{ height: 200, width: '100%' }}>ss</div>
-        </div>
+        </Stickyard>       
       </div>
     );
   }

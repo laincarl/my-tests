@@ -10,6 +10,7 @@ export default function Loading(props) {
       return null;
     }
   } else if (props.error) {
+    console.error(props.error);
     return <div>Error! Component failed to load</div>;
   } else {
     return null;

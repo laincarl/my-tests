@@ -217,5 +217,5 @@ Stickyard.propTypes = {
    * It's called when a element becomes sticky, `-1` means there is no sticky element.
    */
   onSticky: PropTypes.func,
-  stickPosition: PropTypes.onOf(['top', 'bottom']),
+  stickPosition: PropTypes.oneOf(['top', 'bottom']),
 };
