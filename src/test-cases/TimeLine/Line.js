@@ -168,7 +168,7 @@ class Line extends Component {
         {/* 轴上的标记点 */}
         <div>
           {
-            marks.map(mark => (
+            marks && marks.length && marks.map(mark => (
               <HoverPoint
                 key={mark.title}
                 left={this.calculateLeft(mark.date)}
@@ -205,7 +205,7 @@ class Line extends Component {
           </AlignBox>
           <div>
             {
-              marks.map(mark => (
+              marks && marks.length && marks.map(mark => (
                 <AlignBox left={this.calculateLeft(mark.date)}>
                   <span
                     key={mark.title}
