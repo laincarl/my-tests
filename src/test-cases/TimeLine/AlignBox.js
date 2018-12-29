@@ -35,9 +35,9 @@ class AlignBox extends Component {
     // 父元素的宽度
     const totalWidth = node.parentNode.offsetWidth;
     let finalLeft = left; 
-    finalLeft -= contentWidth / 2;// 向左移动，居中
-    finalLeft = Math.max(0, finalLeft);// 保证向左不会超出父元素
+    finalLeft -= contentWidth / 2;// 向左移动，居中    
     finalLeft = Math.min(finalLeft, totalWidth - contentWidth);// 保证向右不会超出父元素   
+    finalLeft = Math.max(0, finalLeft);// 保证向左不会超出父元素
     finalLeft = Math.round(finalLeft);   
     // 防止渲染死循环
     if (Math.abs(this.state.left - finalLeft) > 1) {

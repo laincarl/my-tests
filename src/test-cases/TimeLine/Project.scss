@@ -11,29 +11,29 @@
     // margin-left: 100px;
     // width: calc(100% - 100px);
   }
-  &-content {
-    display: flex;
-    position: relative;
-    &-left {
-      width: 100px;    
-      background: rgb(244, 245, 247);
-      position: relative;
-      &-content {
-        position:absolute;
-        bottom: 37px;
-        display: flex;
-        align-items: center;
-        margin-left: 10px;
-      }
-    }
-    &-right {
-      flex: 1;
-      &-time-line {
-        width: 100%;
-      }
-      &-board-area {
-        position: relative;
-      }
-    }
-  }
+  // &-content {
+  //   display: flex;
+  //   position: relative;
+  //   &-left {
+  //     width: 100px;    
+  //     background: rgb(244, 245, 247);
+  //     position: relative;
+  //     &-content {
+  //       position:absolute;
+  //       bottom: 37px;
+  //       display: flex;
+  //       align-items: center;
+  //       margin-left: 10px;
+  //     }
+  //   }
+  //   &-right {
+  //     flex: 1;
+  //     &-time-line {
+  //       width: 100%;
+  //     }
+  //     &-board-area {
+  //       position: relative;
+  //     }
+  //   }
+  // }
 }

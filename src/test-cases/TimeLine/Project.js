@@ -4,7 +4,6 @@ import Moment from 'moment';
 import { findDOMNode } from 'react-dom';
 import 'moment/locale/zh-cn';
 import { extendMoment } from 'moment-range';
-import './TimeLine.scss';
 import { observer } from 'mobx-react';
 import TimeLineStore from './TimeLineStore';
 import Line from './Line';
@@ -12,9 +11,13 @@ import './Project.scss';
 import icon from './assets/test.png';
 import Board from './Board';
 
+
 const moment = extendMoment(Moment);
-
-
+moment.locale('zh-cn');
+function rnd(n, m) {
+  const random = Math.floor(Math.random() * (m - n + 1) + n);
+  return random;
+}
 @observer
 class Project extends Component {
   constructor() {
@@ -110,34 +113,77 @@ class Project extends Component {
   render() {
     const { singleWidth, range } = this.state;
     const HeightLightDuring = TimeLineStore.getHeightLightDuring;
-    const { data } = this.props;
     const {
-      name, boards, id, marks, 
-    } = data;
-    // console.log(marks);
+      data, scale, displayMethod, sticky, registerSticky, sprintAndStage,
+    } = this.props;
+    const { name, boards, id } = data;
+    const marks = [{ key: 'plan_1', date: moment().startOf('month').add(rnd(2, 20), 'days'), title: ' 猪齿鱼1.0版本' }];
     return (
-      <div className="Project">
+      <div 
+        className="Project" 
+        style={{
+          paddingLeft: 100,
+          background: '#f5f5f5',
+        }}
+      >
         {/* 中间数据区域 */}
-        <div className="Project-content">
-          <div className="Project-content-left">
-            <div className="Project-content-left-content">
-              <img src={icon} className="Project-icon" alt="" />
-              <div>{name}</div>
-            </div>
-          </div>
+        <div 
+          className="Project-content"
+          style={{
+            background: '#fff',
+          }}
+        >
           <div className="Project-content-right" ref={this.saveRef('container')}>
             {/* 内容区域 */}
-            <div className="Project-content-right-board-area">
+            <div 
+              className="Project-content-right-board-area"
+              style={{
+                display: 'flex',
+                flexDirection: 'center',
+              }}
+            >
               {
-                boards.map(board => <Board singleWidth={singleWidth} range={range} issues={board.issues} />)
+                boards.map(board => <Board scale={scale} singleWidth={singleWidth} range={range} lineName={board.title} issues={board.issues} />)
               }
               <div className="HeightLightToday" style={this.getHeightLightTodayStyle()} />
               <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
             </div>
-            {/* 时间轴区域 */}
-            <div className="Project-content-right-time-line">
-              <Line singleWidth={singleWidth} proId={id} range={range} HeightLightDuring={HeightLightDuring} marks={marks} ref={this.saveRef('line')} />
-            </div>
+          </div>
+
+          {/* 时间轴区域 */}
+          <div>
+            {            
+              <div
+                style={{
+                  position: 'relative',
+                }}
+                ref={sticky ? registerSticky : null}
+              >
+                <div 
+                  className="Project-content-left" 
+                  style={{ 
+                    position: 'absolute',
+                    left: -91,
+                    top: -14,
+                  }}
+                >
+                  <div className="Project-content-left-content" style={{ display: 'flex', flexDirection: 'row' }}>
+                    <img src={icon} className="Project-icon" alt="" />
+                    <div style={{ marginTop: 5 }}>{name}</div>
+                  </div>
+                </div>
+                <div 
+                  className="Project-content-right-time-line"
+                  style={{
+                    //  display: 'inline-block',
+                    background: '#fff',
+                  }}
+                >
+                  <Line singleWidth={singleWidth} proId={id} range={range} HeightLightDuring={HeightLightDuring} marks={marks} />
+                </div>
+              </div>      
+           }
+
           </div>
         </div>
         {/* 底部时间轴以及项目区域 */}
