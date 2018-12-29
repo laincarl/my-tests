@@ -1,79 +1,91 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Spin, Table, Button } from 'antd';
-// import { PageTable as Table } from 'antd-table-infinity';
-import './TableInfinity.css';
-import Tag from './Tag';
-// import 'antd-table-infinity/index.css';
+import { Spin, Button, Checkbox } from 'antd';
+import { Column, Table } from 'react-virtualized';
+import _ from 'lodash';
+import 'react-virtualized/styles.css';
+// only needs to be imported once
+const CheckboxGroup = Checkbox.Group;
+// Table data as an array of objects
+const list = Array(100).fill(0).map(() => ({ name: 'Brian Vaughn', description: 'Software engineer' }));
 
-const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  render(name, record) {
-    return <Tag data={record} dataIndex="name" />;
-  },
-}, {
-  title: 'Age',
-  dataIndex: 'age',
-  render(name, record) {
-    return <Tag data={record} dataIndex="age" />;
-  },
-}, {
-  title: 'Address',
-  dataIndex: 'address',
-  render(name, record) {
-    return <Tag data={record} dataIndex="address" />;
-  },
-}];
-  
-const data = [];
-for (let i = 0; i < 2000; i += 1) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
-  });
-}
 class TableInfinity extends Component {
-    state = {
-      page: 1,
-      loading: false,
-      mode: 1,
-    };
+  state = {
+    page: 1,
+    loading: false,
+    columns: [
+      {
+        label: 'Name',
+        dataKey: 'name',
+        width: 150,
+        render: ({ cellData }) => (
+          <div style={{ color: 'red' }}>
+            {cellData}
+          </div>
+        ),
+        show: true,
+      }, {
+        label: 'Description',
+        dataKey: 'description',
+        width: 250,
+        show: true,
+      }, {
+        label: 'Action',
+        dataKey: 'action',
+        width: 200,
+        render: () => <Button>click</Button>,
+        show: true,
+      },
+    ],
+  };
+  
+  handleChange = (checkedValues) => {
+    const columns = [...this.state.columns];
+    columns.forEach((column) => {
+      if (checkedValues.includes(column.dataKey)) {
+        column.show = true;
+      } else {
+        column.show = false;
+      }
+    });    
+    this.setState({
+      columns,
+    });
+  }
 
-    handleSwitch=() => {
-      const { mode } = this.state;
-      this.setState({
-        mode: mode === 1 ? 0 : 1,
-      });
-    }
 
-    render() {
-      const { page, loading, mode } = this.state;
-
-      return ([
-        <Button onClick={this.handleSwitch}>switch</Button>,
-        <Table
-          className="custom-classname"
-          pagination={{
-            // position: 'both',
-            // defaultCurrent: 21,
-            pageSize: 200,
-            // className: 'custom-classname-pagination',
-          }}
-          loading={loading}          
-        //   pageSize={100}
-        //   bidirectionalCachePages={1}
-        //   total={5000}
-          dataSource={data}
-          columns={mode === 1 ? columns : columns.slice(2)}
-        //   scroll={{ x: 2500, y: 650 }}
-          bordered
-          debug
-        />]
-      );
-    }
+  render() {
+    const {
+      page, loading, columns, columnKeys,
+    } = this.state;
+    return (<div>
+      <CheckboxGroup options={columns.map(column => column.dataKey)} defaultValue={columns.map(column => column.dataKey)} onChange={this.handleChange} />
+      <Table
+        width={600}
+        height={300}
+        headerHeight={20}
+        rowHeight={30}
+        rowCount={list.length}
+        rowGetter={({ index }) => list[index]}
+      >
+        {
+          columns.map(column => (
+            column.show && (
+              <Column
+                headerStyle={{ padding: 16 }}
+                style={{ padding: 16 }}
+                cellRenderer={column.render}
+                label={column.label}
+                dataKey={column.dataKey}
+                width={column.width}
+              />            
+            )
+          ))
+        }
+      </Table>
+    </div>
+    );
+  }
 }
 
 TableInfinity.propTypes = {

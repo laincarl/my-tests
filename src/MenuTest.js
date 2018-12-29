@@ -25,16 +25,17 @@ class MenuTest extends Component {
         }}>
         <Menu.Item key="/">首页</Menu.Item>
         <Menu.Item key="/Anchor">Anchor</Menu.Item>
-<Menu.Item key="/Dragreact">Dragreact</Menu.Item>
-<Menu.Item key="/Main">Main</Menu.Item>
-<Menu.Item key="/ResizeAble">ResizeAble</Menu.Item>
 <Menu.Item key="/Material">Material</Menu.Item>
+<Menu.Item key="/Main">Main</Menu.Item>
 <Menu.Item key="/Modal">Modal</Menu.Item>
+<Menu.Item key="/ResizeAble">ResizeAble</Menu.Item>
+<Menu.Item key="/Dragreact">Dragreact</Menu.Item>
+<Menu.Item key="/StickDOM">StickDOM</Menu.Item>
+<Menu.Item key="/Tabs">Tabs</Menu.Item>
 <Menu.Item key="/ResizeDivider">ResizeDivider</Menu.Item>
+<Menu.Item key="/TimeLine">TimeLine</Menu.Item>
 <Menu.Item key="/TableInfinity">TableInfinity</Menu.Item>
 <Menu.Item key="/TreeRender">TreeRender</Menu.Item>
-<Menu.Item key="/TimeLine">TimeLine</Menu.Item>
-<Menu.Item key="/Tabs">Tabs</Menu.Item>
         {/* <Menu.Item key="/tablenest">tablenest</Menu.Item>
         <Menu.Item key="/cssmodule">cssmodule</Menu.Item>
         <Menu.Item key="/cssmodule2">cssmodule2</Menu.Item>

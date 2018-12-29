@@ -13,11 +13,8 @@ import icon from './assets/test.png';
 import Board from './Board';
 
 const moment = extendMoment(Moment);
-moment.locale('zh-cn');
-function rnd(n, m) {
-  const random = Math.floor(Math.random() * (m - n + 1) + n);
-  return random;
-}
+
+
 @observer
 class Project extends Component {
   constructor() {
@@ -114,8 +111,10 @@ class Project extends Component {
     const { singleWidth, range } = this.state;
     const HeightLightDuring = TimeLineStore.getHeightLightDuring;
     const { data } = this.props;
-    const { name, boards, id } = data;
-    const marks = [{ key: 'plan_1', date: moment().startOf('month').add(rnd(2, 20), 'days'), title: ' 猪齿鱼1.0版本' }];
+    const {
+      name, boards, id, marks, 
+    } = data;
+    // console.log(marks);
     return (
       <div className="Project">
         {/* 中间数据区域 */}

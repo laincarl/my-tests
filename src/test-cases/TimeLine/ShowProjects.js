@@ -9,6 +9,11 @@ import './ShowProjects.scss';
 import icon from './assets/test.png';
 import Line from './Line';
 
+moment.locale('zh-cn');
+function rnd(n, m) {
+  const random = Math.floor(Math.random() * (m - n + 1) + n);
+  return random;
+}
 @observer
 class ShowProjects extends Component {
   state = {
@@ -31,6 +36,7 @@ class ShowProjects extends Component {
           title: '自动化测试（前端）',
         }]),
       }],
+      marks: [{ key: 'plan_1', date: moment().startOf('month').add(rnd(2, 20), 'days'), title: ' 猪齿鱼1.0版本' }],
     }, {
       id: 2,
       name: 'MIN',
@@ -50,6 +56,7 @@ class ShowProjects extends Component {
           title: '自动化测试（前端）',
         }]),
       }],
+      marks: [{ key: 'plan_2', date: moment().startOf('month').add(rnd(2, 20), 'days'), title: ' 猪齿鱼2.0版本' }],
     }, {
       id: 3,
       name: 'ZHI',
@@ -69,6 +76,7 @@ class ShowProjects extends Component {
           title: '自动化测试（前端）',
         }]),
       }],
+      marks: [{ key: 'plan_3', date: moment().startOf('month').add(rnd(2, 20), 'days'), title: ' 猪齿鱼3.0版本' }],
     },
     ],
   }
@@ -100,7 +108,7 @@ class ShowProjects extends Component {
   }
 
   handleScroll = () => {
-    console.log('top', this.stickTop);
+    // console.log('top', this.stickTop);
     const { currentStickIndex } = this;
     const tops = [];
     for (let i = 0; i < Object.keys(this.TimeLines).length; i += 1) {
@@ -112,6 +120,7 @@ class ShowProjects extends Component {
     }
     let targetIndex = 0;
     if (tops[0] > this.stickTop) {
+      console.log('daty');
       targetIndex = 0;
     } else if (tops[tops.length - 1].top < this.stickTop) {
       targetIndex = tops.length - 1;     
@@ -169,7 +178,6 @@ class ShowProjects extends Component {
           </div>
         </div>
       </div>
-
     );
   }
 }

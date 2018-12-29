@@ -29,6 +29,7 @@
         "immutability-helper": "^2.7.1",
         "inquirer": "^5.2.0",
         "interactjs": "^1.3.4",
+        "lodash": "^4.17.11",
         "moment": "^2.22.2",
         "moment-range": "^4.0.1",
         "omit.js": "^1.0.0",
@@ -37,6 +38,9 @@
         "react-dnd": "^5.0.0",
         "react-dnd-html5-backend": "^5.0.1",
         "react-loadable": "^5.4.0",
-        "react-transition-group": "^2.5.0"
+        "react-sticky": "^6.0.3",
+        "react-transition-group": "^2.5.0",
+        "react-virtualized": "^9.21.0",
+        "stickyard": "^0.3.0"
     }
 }

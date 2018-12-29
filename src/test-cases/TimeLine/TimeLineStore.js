@@ -19,6 +19,7 @@ class TimeLineStore {
   };
 
   @action setHeightLightDuring = (HeightLightDuring) => {
+    console.log(HeightLightDuring);
     this.HeightLightDuring = HeightLightDuring;
   }
 
@@ -27,7 +28,7 @@ class TimeLineStore {
   }
 
   @computed get getHeightLightDuring() {
-    return toJS(this.StickData);
+    return toJS(this.HeightLightDuring);
   }
 
   @computed get getStickData() {
