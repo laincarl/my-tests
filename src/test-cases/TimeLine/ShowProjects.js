@@ -84,6 +84,9 @@ class ShowProjects extends Component {
     this[name] = ref;
   }
 
+  handleResize=() => {
+    this.sticky.updateState();
+  }
 
   /**
    * 点击页面重设日期高亮
@@ -100,14 +103,13 @@ class ShowProjects extends Component {
     } = StickData;
     return (
       <div style={{ height: '100%', position: 'relative' }}>
-        <Stickyard stickPosition="bottom">
+        <Stickyard stickPosition="bottom" ref={this.saveRef('sticky')}>
           {({ registerContainer, registerSticky }) => (
             <div className="Projects" onClick={this.resetHeightDuring} role="none" ref={registerContainer}>
               {projects.map((project, i) => <Project data={project} registerSticky={registerSticky} sticky />)}
             </div>               
           )}
-        </Stickyard>     
-           
+        </Stickyard>
       </div>
     );
   }

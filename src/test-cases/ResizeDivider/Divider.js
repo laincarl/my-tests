@@ -115,7 +115,7 @@ class Divider extends Component {
     const differX = e.clientX - x;
     const differY = e.clientY - y;
     // console.log(differX, differY);
-
+    const { onResize } = this.props;
     const { preElement, nextElement } = this.getBindElements();
     const { preProps, nextProps } = this.getBindProps();
     if (this.props.type === 'vertical') {
@@ -131,6 +131,9 @@ class Divider extends Component {
         if (nextElement) {
           nextElement.style.height = `${nextHeight}px`;
         }
+        if (onResize) {
+          onResize([preHeight, nextHeight]);
+        }
       }
     } else {
       const preWidth = this.getResizeWidth(differX, preProps.size, prePosition);
@@ -144,6 +147,9 @@ class Divider extends Component {
         }
         if (nextElement) {
           nextElement.style.width = `${nextWidth}px`;
+        }
+        if (onResize) {
+          onResize([preWidth, nextWidth]);
         }
       }
     }    

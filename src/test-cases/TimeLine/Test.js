@@ -11,10 +11,18 @@ class Test extends Component {
     isProject: false,
   }
 
+  saveRef = name => (ref) => {
+    this[name] = ref;
+  }
+
   handleModeChange=() => {
     this.setState({
       isProject: !this.state.isProject,
     });
+  }
+
+  handleResize=() => {
+    this.ShowProjects.handleResize();
   }
 
   render() {
@@ -29,11 +37,11 @@ class Test extends Component {
           >
             <div style={{ padding: 20, height: '100%' }}>
               <Switch checked={isProject} onChange={this.handleModeChange} />
-              <ShowProjects />
+              <ShowProjects ref={this.saveRef('ShowProjects')} />
               {/* <TimeLine isProject={isProject} /> */}
             </div>
           </Section>
-          <Divider />
+          <Divider onResize={this.handleResize} />
           <Section size={{
             height: 120,
             minHeight: 50,
