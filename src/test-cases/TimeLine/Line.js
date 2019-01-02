@@ -189,7 +189,7 @@ class Line extends Component {
         {/* 内容区域 */}
         <div style={{ height: 50 }}>
           {/* 开始时间 */}
-          <AlignBox left={0}>
+          <AlignBox left={0} zIndex={activePoint === 'start' ? 5 : 1}>
             <span
               style={{
                 display: 'inline-block',
@@ -198,6 +198,7 @@ class Line extends Component {
                 color: 'gray',
                 border: activePoint === 'start' && '1px solid gray',
                 borderRadius: 5,
+
               }}
             >
               {`${moment().format('LL')}-开始`}
@@ -215,6 +216,7 @@ class Line extends Component {
                       background: 'white',
                       color: 'rgb(54, 179, 126)',
                       border: activePoint === mark.key && '1px solid rgb(54, 179, 126)',
+                      zIndex: activePoint === mark.key && 5
                     }}
                   >
                     {`${mark.date.format('LL')}-${mark.title}`}

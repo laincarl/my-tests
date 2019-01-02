@@ -19,7 +19,7 @@ class TimeLineStore {
   };
 
   @action setHeightLightDuring = (HeightLightDuring) => {
-    console.log(HeightLightDuring);
+    // console.log(HeightLightDuring);
     this.HeightLightDuring = HeightLightDuring;
   }
 
