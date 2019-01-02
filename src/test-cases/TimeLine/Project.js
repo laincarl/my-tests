@@ -56,7 +56,7 @@ class Project extends Component {
   saveRef = name => (ref) => {
     if (name === 'line' && this.props.saveTimeLineRef) {
       this.props.saveTimeLineRef(ref);
-    }    
+    }
     this[name] = ref;
   }
 
@@ -119,27 +119,28 @@ class Project extends Component {
     const { name, boards, id } = data;
     const marks = [{ key: 'plan_1', date: moment().startOf('month').add(rnd(2, 20), 'days'), title: ' 猪齿鱼1.0版本' }];
     return (
-      <div 
-        className="Project" 
+      <div
+        className="Project"
         style={{
           paddingLeft: 100,
           background: '#f5f5f5',
         }}
       >
         {/* 中间数据区域 */}
-        <div 
+        <div
           className="Project-content"
           style={{
             background: '#fff',
+            position: 'relative',
           }}
         >
           <div className="Project-content-right" ref={this.saveRef('container')}>
             {/* 内容区域 */}
-            <div 
+            <div
               className="Project-content-right-board-area"
               style={{
-                display: 'flex',
-                flexDirection: 'center',
+                // display: 'flex',
+                // flexDirection: 'center',
               }}
             >
               {
@@ -149,19 +150,19 @@ class Project extends Component {
               <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
             </div>
           </div>
-
           {/* 时间轴区域 */}
           <div>
-            {            
+            {
               <div
                 style={{
                   position: 'relative',
+                  height: 55
                 }}
                 ref={sticky ? registerSticky : null}
               >
-                <div 
-                  className="Project-content-left" 
-                  style={{ 
+                <div
+                  className="Project-content-left"
+                  style={{
                     position: 'absolute',
                     left: -91,
                     top: -14,
@@ -172,7 +173,7 @@ class Project extends Component {
                     <div style={{ marginTop: 5 }}>{name}</div>
                   </div>
                 </div>
-                <div 
+                <div
                   className="Project-content-right-time-line"
                   style={{
                     //  display: 'inline-block',
@@ -181,13 +182,11 @@ class Project extends Component {
                 >
                   <Line singleWidth={singleWidth} proId={id} range={range} HeightLightDuring={HeightLightDuring} marks={marks} />
                 </div>
-              </div>      
-           }
+              </div>
+            }
 
           </div>
         </div>
-        {/* 底部时间轴以及项目区域 */}
-
       </div>
     );
   }

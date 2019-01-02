@@ -35,15 +35,13 @@ class Test extends Component {
             minHeight: 250,
           }}
           >
-            <div style={{ padding: 20, height: '100%' }}>
-              <Switch checked={isProject} onChange={this.handleModeChange} />
-              <ShowProjects ref={this.saveRef('ShowProjects')} />
-              {/* <TimeLine isProject={isProject} /> */}
+            <div style={{height: '100%' }}>            
+              <ShowProjects ref={this.saveRef('ShowProjects')} />      
             </div>
           </Section>
           <Divider onResize={this.handleResize} />
           <Section size={{
-            height: 500,
+            height: 200,
             minHeight: 50,
           }}
           >
