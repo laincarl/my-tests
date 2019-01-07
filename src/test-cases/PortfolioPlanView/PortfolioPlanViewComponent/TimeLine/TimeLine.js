@@ -6,12 +6,12 @@ import { extendMoment } from 'moment-range';
 import HoverPoint from './HoverPoint';
 import Point from './Point';
 import AlignBox from './AlignBox';
-import TimeLineStore from './TimeLineStore';
+import PortfolioPlanViewStore from '../../PortfolioPlanViewStore';
 
 const moment = extendMoment(Moment);
 const MOVE_COLOR = 'rgb(0, 101, 255)';
 
-class Line extends Component {
+class TimeLine extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,7 +37,7 @@ class Line extends Component {
       singleWidth, proId, range, HeightLightDuring, marks,
     } = this.props;
 
-    TimeLineStore.setStickData({
+    PortfolioPlanViewStore.setStickData({
       singleWidth, proId, range, HeightLightDuring, marks,
     });
   }
@@ -254,8 +254,8 @@ class Line extends Component {
   }
 }
 
-Line.propTypes = {
+TimeLine.propTypes = {
 
 };
 
-export default Line;
+export default TimeLine;

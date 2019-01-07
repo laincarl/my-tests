@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch } from 'antd';
-import TimeLine from './TimeLine';
 import ResizeContainer from '../ResizeDivider/ResizeContainer';
 import ShowProjects from './ShowProjects';
 
@@ -35,7 +34,7 @@ class Test extends Component {
             minHeight: 250,
           }}
           >
-            <div style={{height: '100%' }}>            
+            <div style={{ height: '100%' }}>            
               <ShowProjects ref={this.saveRef('ShowProjects')} />      
             </div>
           </Section>

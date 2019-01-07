@@ -5,12 +5,17 @@ import { findDOMNode } from 'react-dom';
 import 'moment/locale/zh-cn';
 import { extendMoment } from 'moment-range';
 import { observer } from 'mobx-react';
-import TimeLineStore from '../TimeLine/TimeLineStore';
-import Line from '../TimeLine/Line';
-import '../TimeLine/Project.scss';
-import icon from './test.png';
-import Board from './Board';
-import Stickyard from './Stickyard';
+import PortfolioPlanViewStore from '../../PortfolioPlanViewStore';
+import './Project.scss';
+import icon from '../../assets/test.png';
+// import Board from './Board';
+import ScheduleBoard from '../ScheduleBoard/ScheduleBoard';
+import WorkLoadBoard from '../WorkLoadBoard/WorkLoadBoard';
+import TargetScheduleBoard from '../TargetScheduleBoard/TargetScheduleBoard';
+
+import TimeLine from '../TimeLine/TimeLine';
+
+import Stickyard from '../../../StickDOM/stickyard';
 
 
 const moment = extendMoment(Moment);
@@ -19,6 +24,12 @@ function rnd(n, m) {
   const random = Math.floor(Math.random() * (m - n + 1) + n);
   return random;
 }
+
+const Boards = {
+  TargetScheduleBoard,
+  WorkLoadBoard,
+  ScheduleBoard,
+};
 @observer
 class Project extends Component {
   constructor() {
@@ -57,13 +68,13 @@ class Project extends Component {
   saveRef = name => (ref) => {
     if (name === 'line' && this.props.saveTimeLineRef) {
       this.props.saveTimeLineRef(ref);
-    }    
+    }
     this[name] = ref;
   }
 
 
   getHeightLightStyle = () => {
-    const HeightLightDuring = TimeLineStore.getHeightLightDuring;
+    const HeightLightDuring = PortfolioPlanViewStore.getHeightLightDuring;
     const {
       start, end, offsetTop, proId,
     } = HeightLightDuring;
@@ -108,89 +119,120 @@ class Project extends Component {
    * 点击页面重设日期高亮
    */
   resetHeightDuring = () => {
-    TimeLineStore.setHeightLightDuring({});
+    PortfolioPlanViewStore.setHeightLightDuring({});
+  }
+
+  renderBoard = () => {
+    const currentModeType = PortfolioPlanViewStore.getCurrentModeType;
+    const { singleWidth, range } = this.state;
+    const {
+      data, scale, displayMethod, sticky, registerSticky, sprintAndStage,
+    } = this.props;
+    const { boards } = data;
+    return boards.map((board) => {
+      if (currentModeType === 'TargetSchedule') {
+        return (
+          <TargetScheduleBoard scale={scale} singleWidth={singleWidth} range={range} lineName={board.title} issues={board.issues} />
+        );
+      }
+      if (currentModeType === 'WorkLoad') {
+        return (
+          <WorkLoadBoard lineData={board} singleWidth={singleWidth} range={range} lineName={board.title} sprintWorkLoad={board.sprintWorkLoad} />
+        );
+      } 
+      if (currentModeType === 'Schedule') {
+        return (
+          <ScheduleBoard scale={scale} singleWidth={singleWidth} range={range} lineName={board.title} sprintsAndIssues={board.sprintsAndIssues} sprintAndStage={sprintAndStage} />
+        );
+      } 
+    });
   }
 
   render() {
     const { singleWidth, range } = this.state;
-    const HeightLightDuring = TimeLineStore.getHeightLightDuring;
+    const HeightLightDuring = PortfolioPlanViewStore.getHeightLightDuring;
     const {
-      data, scale, displayMethod, registerSticky, sprintAndStage,
+      data, scale, displayMethod, sticky, registerSticky, sprintAndStage,
     } = this.props;
     const { name, boards, id } = data;
     const marks = [{ key: 'plan_1', date: moment().startOf('month').add(rnd(2, 20), 'days'), title: ' 猪齿鱼1.0版本' }];
     return (
-      <div 
-        className="Project" 
+      <div
+        className="Project"
         style={{
           paddingLeft: 100,
           background: '#f5f5f5',
         }}
       >
         {/* 中间数据区域 */}
-        <div 
+        <div
           className="Project-content"
           style={{
             background: '#fff',
+            position: 'relative',
           }}
         >
           <div className="Project-content-right" ref={this.saveRef('container')}>
             {/* 内容区域 */}
-            <div 
+            <div
               className="Project-content-right-board-area"
               style={{
-                display: 'flex',
-                flexDirection: 'center',
+                // display: 'flex',
+                // flexDirection: 'center',
               }}
             >
               {
-                boards.map(board => <Board scale={scale} singleWidth={singleWidth} range={range} lineName={board.title} sprintsAndIssues={board.sprintsAndIssues} sprintAndStage={sprintAndStage} />)
+                // boards.map(board => <TargetScheduleBoard scale={scale} singleWidth={singleWidth} range={range} lineName={board.title} issues={board.issues} />)
+                
+                // boards.map((board) => {
+                //   this.renderBoard(board);
+                // })
+
+              this.renderBoard()
+
               }
               <div className="HeightLightToday" style={this.getHeightLightTodayStyle()} />
               <div className="HeightLightDuring" style={this.getHeightLightStyle()} />
             </div>
           </div>
-
           {/* 时间轴区域 */}
           <div>
             {
-             displayMethod === 'project' && (
-               <div
-                 style={{
-                   position: 'relative',
-                 }}
-                 ref={registerSticky}
-               >
-                 <div 
-                   className="Project-content-left" 
-                   style={{ 
-                     position: 'absolute',
-                     left: -91,
-                     top: -14,
-                   }}
-                 >
-                   <div className="Project-content-left-content" style={{ display: 'flex', flexDirection: 'row' }}>
-                     <img src={icon} className="Project-icon" alt="" />
-                     <div style={{ marginTop: 5 }}>{name}</div>
-                   </div>
-                 </div>
-                 <div 
-                   className="Project-content-right-time-line"
-                   style={{
-                     //  display: 'inline-block',
-                     background: '#fff',
-                   }}
-                 >
-                   <Line singleWidth={singleWidth} proId={id} range={range} HeightLightDuring={HeightLightDuring} marks={marks} />
-                 </div>
-               </div>
-             )
-           }
+              <div
+                style={{
+                  position: 'relative',
+                  height: 55,
+                  background: '#fff',
+                }}
+                ref={sticky ? registerSticky : null}
+              >
+                <div
+                  className="Project-content-left"
+                  style={{
+                    position: 'absolute',
+                    left: -91,
+                    top: -14,
+                  }}
+                >
+                  <div className="Project-content-left-content" style={{ display: 'flex', flexDirection: 'row' }}>
+                    <img src={icon} className="Project-icon" alt="" />
+                    <div style={{ marginTop: 5 }}>{name}</div>
+                  </div>
+                </div>
+                <div
+                  className="Project-content-right-time-line"
+                  style={{
+                    //  display: 'inline-block',
+                    background: '#fff',
+                  }}
+                >
+                  <TimeLine singleWidth={singleWidth} proId={id} range={range} HeightLightDuring={HeightLightDuring} marks={marks} />
+                </div>
+              </div>
+            }
 
           </div>
         </div>
-        {/* 底部时间轴以及项目区域 */}
-
       </div>
     );
   }

@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import SprintLine from './SprintLine';
 import Line from '../TimeLine/Line';
 import './WorkLoad.css';
-import '../TimeLine/TimeLine.scss';
 import ResizeContainer from '../ResizeDivider/ResizeContainer';
 
 const { Divider, Section } = ResizeContainer;
