@@ -17,7 +17,7 @@ class AlignBox extends Component {
 
   static defaultProps = {
     totalWidth: 0,
-    zIndex: 1,
+    zIndex: 0,
   }
 
   componentDidMount() {
@@ -39,6 +39,7 @@ class AlignBox extends Component {
     finalLeft = Math.min(finalLeft, totalWidth - contentWidth);// 保证向右不会超出父元素   
     finalLeft = Math.max(0, finalLeft);// 保证向左不会超出父元素
     finalLeft = Math.round(finalLeft);   
+
     // 防止渲染死循环
     if (Math.abs(this.state.left - finalLeft) > 1) {
       this.setState({

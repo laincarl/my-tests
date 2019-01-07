@@ -187,7 +187,7 @@ class Line extends Component {
           }
         </div>
         {/* 内容区域 */}
-        <div style={{ height: 50 }}>
+        <div style={{ height: 40 }}>
           {/* 开始时间 */}
           <AlignBox left={0} zIndex={activePoint === 'start' ? 5 : 1}>
             <span
