@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+.TimeLine-container {
+  height: 100%;
+  /* height:500px;
+  overflow: auto; */
+  flex:1;
+  position: relative;
+}
+
+.TimeLine-event-container {
+  width: 100%;
+  position: relative;
+}
+
+.fixed-line {
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+}
+
+.TimeLine-line-container {
+  width: 100%;
+  position: relative;
+}
+.TimeLine-content{
+  position: relative;
+}
+.TimeLine-line {
+  height: 6px;
+  width: 100%;
+  border: 1px solid rgb(235, 236, 240);
+  border-left: none;
+  border-right: none;
+}
+
+.Point {
+  box-sizing: content-box;
+  top: -6px;
+  /* transform: translateY(-50%); */
+  margin-left: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+  border: 1px solid rgb(235, 236, 240);
+}
+
+.Point-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: calc(100% - 4px);
+  width: calc(100% - 4px);
+  margin: auto;
+  border-radius: 50%;
+}
+
+.Point-content {
+  /* margin-top: 5px;
+  margin-left: 5px; */
+  position: absolute;
+  /* left: 50%;
+  transform: translateX(-50%); */
+  top: 6px;
+  left: 7px;
+  /* border: 1px solid rgb(0, 101, 255);
+  color: rgb(0, 101, 255);
+  padding: 0 5px;
+  white-space: nowrap;
+  border-radius: 5;
+  text-align: center;
+  background: white;  */
+}

@@ -30,63 +30,64 @@ class PortfolioPlanView extends Component {
     console.log(PortfolioPlanViewStore);
   }
 
-      
-    saveRef = name => (ref) => {
-      this[name] = ref;
-    }
-    
-      handleResize=() => {
-        this.ShowProjects.handleResize();
-      }
+
+  saveRef = name => (ref) => {
+    this[name] = ref;
+  }
+
+  handleResize = () => {
+    this.ShowProjects.handleResize();
+  }
 
 
-      render() {
-        const currentModeType = PortfolioPlanViewStore.getCurrentModeType;
-        return (
-          <div>
-            <ResizeContainer type="vertical">
-              <Section size={{
-                height: 500,
-                minHeight: 250,
-              }}
-              >
-                <div style={{ height: '100%' }}>
-                  <div style={{ display: 'flex', margin: 20 }}>
-                    <div>模式：</div>
-                    <Select
-                      style={{ width: 100 }}
-                      value={
-                        currentModeType
-                      }
-                      onChange={(value) => {
-                        PortfolioPlanViewStore.setCurrentModeType(value);
-                      }}
-                    >
-                      {
-                      ModeOptions.map(mode => <Option value={mode.modeTypeCode} key={mode.modeTypeCode}>{mode.name}</Option>)
-                    }
-                    </Select>
-                  </div>
-                  <ShowProjects ref={this.saveRef('ShowProjects')} />      
-                </div>
-              </Section>
-              <Divider onResize={this.handleResize} />
-              <Section size={{
-                height: 200,
-                minHeight: 50,
-              }}
-              >
-                <div style={{
-                  flex: 1, height: '100%',
-                }}
-                >
-                  {'bottom'}
-                </div>
-              </Section>          
-            </ResizeContainer>
-          </div>
-        );
-      }
+  render() {
+    const currentModeType = PortfolioPlanViewStore.getCurrentModeType;
+    return (
+      <div>
+        <div style={{ display: 'flex', margin: 20 }}>
+          <div>模式：</div>
+          <Select
+            style={{ width: 100 }}
+            value={
+              currentModeType
+            }
+            onChange={(value) => {
+              PortfolioPlanViewStore.setCurrentModeType(value);
+            }}
+          >
+            {
+              ModeOptions.map(mode => <Option value={mode.modeTypeCode} key={mode.modeTypeCode}>{mode.name}</Option>)
+            }
+          </Select>
+        </div>
+        <ResizeContainer type="vertical">
+          <Section size={{
+            height: 500,
+            minHeight: 250,
+          }}
+          >
+            <div style={{ height: '100%' }}>
+
+              <ShowProjects ref={this.saveRef('ShowProjects')} />
+            </div>
+          </Section>
+          <Divider onResize={this.handleResize} />
+          <Section size={{
+            height: 200,
+            minHeight: 50,
+          }}
+          >
+            <div style={{
+              flex: 1, height: '100%',
+            }}
+            >
+              {'bottom'}
+            </div>
+          </Section>
+        </ResizeContainer>
+      </div>
+    );
+  }
 }
 
 PortfolioPlanView.propTypes = {
