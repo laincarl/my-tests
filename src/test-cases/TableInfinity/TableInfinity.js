@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Spin, Button, Checkbox } from 'antd';
 import { Column, Table } from 'react-virtualized';
 import _ from 'lodash';
-import 'react-virtualized/styles.css';
+// import 'react-virtualized/styles.css';
 // only needs to be imported once
 const CheckboxGroup = Checkbox.Group;
 // Table data as an array of objects
@@ -58,7 +58,8 @@ class TableInfinity extends Component {
     const {
       page, loading, columns, columnKeys,
     } = this.state;
-    return (<div>
+    return (
+<div>
       <CheckboxGroup options={columns.map(column => column.dataKey)} defaultValue={columns.map(column => column.dataKey)} onChange={this.handleChange} />
       <Table
         width={600}
