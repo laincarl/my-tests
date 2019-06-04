@@ -25,21 +25,7 @@ class List extends Component {
   }
 
   handleRefresh = () => {
-    // this.setState({
-    //   list: [{
-    //     id: 1,
-    //     title: 'a',
-    //   }, {
-    //     id: 2,
-    //     title: 'b',
-    //   }, {
-    //     id: 3,
-    //     title: 'c',
-    //   }, {
-    //     id: 4,
-    //     title: 'f',
-    //   }],
-    // });
+    ListStore.ppp();
     ListStore.setList([{
       id: 1,
       title: 'a',

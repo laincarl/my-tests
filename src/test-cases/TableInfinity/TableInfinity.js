@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Spin, Button, Checkbox } from 'antd';
 import { Column, Table } from 'react-virtualized';
-import _ from 'lodash';
+
 // import 'react-virtualized/styles.css';
 // only needs to be imported once
 const CheckboxGroup = Checkbox.Group;
@@ -59,17 +59,17 @@ class TableInfinity extends Component {
       page, loading, columns, columnKeys,
     } = this.state;
     return (
-<div>
-      <CheckboxGroup options={columns.map(column => column.dataKey)} defaultValue={columns.map(column => column.dataKey)} onChange={this.handleChange} />
-      <Table
-        width={600}
-        height={300}
-        headerHeight={20}
-        rowHeight={30}
-        rowCount={list.length}
-        rowGetter={({ index }) => list[index]}
-      >
-        {
+      <div>
+        <CheckboxGroup options={columns.map(column => column.dataKey)} defaultValue={columns.map(column => column.dataKey)} onChange={this.handleChange} />
+        <Table
+          width={600}
+          height={300}
+          headerHeight={20}
+          rowHeight={30}
+          rowCount={list.length}
+          rowGetter={({ index }) => list[index]}
+        >
+          {
           columns.map(column => (
             column.show && (
               <Column
@@ -83,8 +83,8 @@ class TableInfinity extends Component {
             )
           ))
         }
-      </Table>
-    </div>
+        </Table>
+      </div>
     );
   }
 }

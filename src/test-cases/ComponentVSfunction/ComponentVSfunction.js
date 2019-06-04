@@ -11,7 +11,7 @@ class ComponentVSfunction extends Component {
       <div>
         ComponentVSfunction
         <UseComponent />
-        <UseFunction />
+        {/* <UseFunction /> */}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-import './ResizeAble.css';
+import PropTypes from 'prop-types';
+
 
 const MODES = {
   top: {
@@ -58,22 +58,23 @@ const MODES = {
     cursor: 'nw-resize',
   },
 };
+const propTypes = {
+  defaultSize: PropTypes.shape({
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }),
+  size: PropTypes.shape({
+    maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    minHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    minWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }),
+};
 class ResizeAble extends Component {
-  static defaultProps={
-    defaultSize: {
-      width: 200,
-      height: 200,
-    },
-  }
-
   constructor(props) {
     super(props);
     this.state = {
       resizing: false,
-      size: {
-        width: props.defaultSize ? props.defaultSize.width : 'auto',
-        height: props.defaultSize ? props.defaultSize.height : 'auto',
-      },
       originSize: {
         width: 0,
         height: 0,
@@ -81,6 +82,11 @@ class ResizeAble extends Component {
         y: 0,
       },
       mode: null,
+    };
+    this.mode = null;
+    this.size = {
+      width: props.defaultSize ? props.defaultSize.width : 'auto',
+      height: props.defaultSize ? props.defaultSize.height : 'auto',
     };
   }
 
@@ -97,8 +103,8 @@ class ResizeAble extends Component {
       mode,
       resizing: true,
       originSize: {
-        width: this.con.offsetWidth,
-        height: this.con.offsetHeight,
+        width: this.resizable.offsetWidth,
+        height: this.resizable.offsetHeight,
         x: e.clientX,
         y: e.clientY,
       },
@@ -122,14 +128,16 @@ class ResizeAble extends Component {
     const {
       height, width, minHeight, minWidth, maxHeight, maxWidth,
     } = size;
-    if ((maxWidth !== undefined && initWidth + vary > maxWidth)
-      || (minWidth !== undefined && initWidth + vary < minWidth)
-    ) {
-      return maxWidth;
+    let Width = 0;
+    if (maxWidth !== undefined && initWidth + vary > maxWidth) {
+      Width = maxWidth;
+    } else if (minWidth !== undefined && initWidth + vary < minWidth) {
+      Width = minWidth;
     } else {
-      return initWidth + vary;
+      Width = initWidth + vary;
     }
-    // this.con.style.width = `${initWidth + vary}px`;
+    return Math.max(Width, 0);
+    // this.resizable.style.width = `${initWidth + vary}px`;
   }
 
   getResizeHeight = (vary) => {
@@ -139,16 +147,19 @@ class ResizeAble extends Component {
     const {
       height, width, minHeight, minWidth, maxHeight, maxWidth,
     } = size;
-    if ((maxHeight !== undefined && initHeight + vary > maxWidth)
-      || (minHeight !== undefined && initHeight + vary < minHeight)
-    ) {
-      return maxHeight;
+    let Height = 0;
+
+    if (maxHeight !== undefined && initHeight + vary > maxHeight) {
+      Height = maxHeight;
+    } else if (minHeight !== undefined && initHeight + vary < minHeight) {
+      Height = minHeight;
     } else {
-      return initHeight + vary;
+      Height = initHeight + vary;
     }
-    // this.con.style.height = `${initHeight + vary}px`;
+    return Math.max(Height, 0);
+    // this.resizable.style.height = `${initHeight + vary}px`;
   }
-  
+
   handleMouseMove = (e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -163,7 +174,7 @@ class ResizeAble extends Component {
       }
       case 'topRight': {
         height = this.getResizeHeight(y - e.clientY);
-        width = this.getResizeWidth(e.clientX - x);  
+        width = this.getResizeWidth(e.clientX - x);
         break;
       }
       case 'right': {
@@ -195,27 +206,22 @@ class ResizeAble extends Component {
       }
       default: break;
     }
-    this.setState({
-      size: {
-        width,
-        height,
-      },
-    });
+    this.resizable.style.width = `${width}px`;
+    this.resizable.style.height = `${height}px`;
+    this.size = {
+      width,
+      height,
+    };
   }
 
   render() {
     const { modes, children, defaultSize } = this.props;
-    const { size, resizing, mode } = this.state;    
+    const { resizing, mode } = this.state;
     return (
       <div
-        className="resizeable container"
-        ref={this.saveRef('con')}
-        style={
-          {
-            ...defaultSize,
-            ...size,
-          }
-        }
+        className="resizable"
+        ref={this.saveRef('resizable')}
+        style={defaultSize}
       >
         {/* 拖动时，创建一个蒙层来显示拖动效果，防止鼠标指针闪烁 */}
         {resizing && (
@@ -231,16 +237,14 @@ class ResizeAble extends Component {
           />
         )}
         {children}
-        {       
-          modes.map(position => <div role="none" style={{ position: 'absolute', ...MODES[position] }} onMouseDown={this.handleMouseDown.bind(this, position)} />)
+        {
+          modes.map(position => <div role="none" key={position} style={{ position: 'absolute', ...MODES[position] }} onMouseDown={this.handleMouseDown.bind(this, position)} />)
         }
       </div>
     );
   }
 }
 
-// ResizeAble.propTypes = {
-
-// };
+ResizeAble.propTypes = propTypes;
 
 export default ResizeAble;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { Popover } from 'antd';
-import _ from 'lodash';
+import map from 'lodash/map';
 import TimeLineStore from '../TimeLine/TimeLineStore';
 // import moment = require('moment');
 
@@ -34,7 +34,7 @@ class Board extends Component {
       test: 'rgb(0, 184, 217)',
     };
 
-    const issues = _.map(sprintsAndIssues, 'issues');
+    const issues = map(sprintsAndIssues, 'issues');
     
     if (true) {
       return (

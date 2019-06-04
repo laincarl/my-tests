@@ -58,7 +58,7 @@ export default class Modal extends Component {
     }
     const { left, top } = this.modal.getBoundingClientRect();
     const { x, y } = this.clickPosition;
-    if (x != undefined && y != undefined) {
+    if (x !== undefined && y !== undefined) {
       const leftOrigin = `${left - x}px`;
       const topOrigin = `${top - y}px`;
       this.modal.style.transformOrigin = `${leftOrigin} ${topOrigin} 0px`;

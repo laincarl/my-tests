@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { Popover } from 'antd';
-import _ from 'lodash';
+import map from 'lodash/map';
 import PortfolioPlanViewStore from '../../PortfolioPlanViewStore';
 // import moment = require('moment');
 
@@ -34,7 +34,7 @@ class ScheduleBoard extends Component {
       test: 'rgb(0, 184, 217)',
     };
 
-    const issues = _.map(sprintsAndIssues, 'issues');
+    const issues = map(sprintsAndIssues, 'issues');
     
     if (true) {
       return (

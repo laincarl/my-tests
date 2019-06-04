@@ -12,25 +12,27 @@ const StatusTagFunc = ({
 }) => {
   const { colour: statusColor, name: statusName, type: statusCode } = status || {};  
   return (
-    <div
-      className=""
-      style={{
-        display: 'inline-block',
-        background: STATUS[statusCode],
-        color: '#fff',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        borderRadius: '2px',
-        padding: '0 6px',
-        lineHeight: '20px',
-        fontSize: '12px',
-        width: 50,
-        textAlign: 'center',
-        ...style,
-      }}
-    >
-      { statusName }
+    <div>
+      <div
+        className=""
+        style={{
+          display: 'inline-block',
+          background: STATUS[statusCode],
+          color: '#fff',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          borderRadius: '2px',
+          padding: '0 6px',
+          lineHeight: '20px',
+          fontSize: '12px',
+          width: 50,
+          textAlign: 'center',
+          ...style,
+        }}
+      >
+        { statusName }
+      </div>
     </div>
   );
 };
