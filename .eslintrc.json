@@ -60,6 +60,7 @@
     "no-unused-vars": "off",
     "react/destructuring-assignment": "off",
     "react/no-find-dom-node": "off",
+    "no-underscore-dangle": "off",
     "jsx-a11y/anchor-is-valid": [
       "warn",
       {
