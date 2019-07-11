@@ -19,11 +19,7 @@ const stores = {
   // ...other stores
 };
 
-class App extends Component {
-  componentDidCatch(error, info) {
-    console.log(error, info);
-  }
-  
+class App extends Component {  
   render() {
     return (
       <Provider {...stores}>

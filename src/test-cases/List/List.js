@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
+import { Button } from 'antd';
+import axios from 'axios';
 import './List.css';
 import Item from './Item';
 import ListStore from './ListStore';
@@ -8,22 +10,6 @@ import Hoc from './Hoc';
 
 @observer
 class List extends Component {
-  state = {
-    list: [{
-      id: 1,
-      title: 'a',
-    }, {
-      id: 2,
-      title: 'b',
-    }, {
-      id: 3,
-      title: 'c',
-    }, {
-      id: 4,
-      title: 'd',
-    }],
-  }
-
   handleRefresh = () => {
     ListStore.ppp();
     ListStore.setList([{
@@ -41,8 +27,22 @@ class List extends Component {
     }]);
   }
 
-  componentDidMount() {
-    console.log('fup');
+  fetchError=() => {
+    fetch('http://localhost/');
+  }
+
+  ajaxError=() => {
+    axios.get('http://localhost/');
+  }
+
+  renderError=() => {
+    ListStore.setList(null);
+  }
+
+  resourceError=() => {
+    const script = document.createElement('script');
+    script.src = 'scriptLink.js';
+    document.body.append(script);
   }
 
   render() {
@@ -50,7 +50,11 @@ class List extends Component {
     const list = ListStore.getList;
     return (
       <div>
-        <button onClick={this.handleRefresh}>refresh</button>
+        <Button onClick={this.handleRefresh}>refresh</Button>
+        <Button onClick={this.fetchError}>fetchError</Button>
+        <Button onClick={this.ajaxError}>ajaxError</Button>
+        <Button onClick={this.renderError}>renderError</Button>
+        <Button onClick={this.resourceError}>resourceError</Button>
         <Hoc data={list}>
           {data => <div>{data.map(item => <Item key={item.id} data={item} />)}</div>}
         </Hoc>

@@ -1,3 +1,4 @@
+/*eslint-disable */
 class ErrorCatch {
   handleWindowError = () => {
     const _oldWindowError = window.onerror;
@@ -67,16 +68,93 @@ class ErrorCatch {
     }, true);
   };
 
+  handleFetchError = () => {
+    if (!window.fetch) return;
+    const _oldFetch = window.fetch.bind(window);
+    window.fetch = (...args) => _oldFetch.apply(this, args).then((res) => {
+      if (!res.ok) { // True if status is HTTP 2xx
+        this.sendError({
+          title: args[0],
+          msg: JSON.stringify(res),
+          category: 'ajax',
+          level: 'error',
+        });
+      }
+      return res;
+    })
+      .catch((error) => {
+        this.sendError({
+          title: args[0],
+          msg: JSON.stringify({
+            message: error.message,
+            stack: error.stack,
+          }),
+          category: 'ajax',
+          level: 'error',
+        });
+        throw error;  
+      });
+  }
+
+handleAjaxError = () => {
+  const protocol = window.location.protocol;
+  if (protocol === 'file:') return;
+
+  // 处理fetch
+  this.handleFetchError();
+
+  // 处理XMLHttpRequest
+  if (!window.XMLHttpRequest) {
+    return;   
+  } 
+  const xmlhttp = window.XMLHttpRequest;
+    
+  const _oldSend = xmlhttp.prototype.send;
+  const _handleEvent = (event, ...other) => {    
+    if (event && event.currentTarget && event.currentTarget.status !== 200) {
+      this.sendError({
+        title: event.target.responseURL,
+        msg: JSON.stringify({
+          response: event.target.response,
+          responseURL: event.target.responseURL,
+          status: event.target.status,
+          statusText: event.target.statusText,
+        }),
+        category: 'ajax',
+        level: 'error',
+      });
+    }
+  };
+  xmlhttp.prototype.send = function (...args) {
+    if (this.addEventListener) {
+      this.addEventListener('error', _handleEvent);
+      this.addEventListener('load', _handleEvent);
+      this.addEventListener('abort', _handleEvent);
+    } else {
+      const _oldStateChange = this.onreadystatechange;
+      this.onreadystatechange = (...args) => {  
+        const [event] = args;
+        if (this.readyState === 4) {
+          _handleEvent(event);
+        }
+        _oldStateChange && _oldStateChange.apply(this, args);
+      };
+    }
+    return _oldSend.apply(this, args);
+  };
+}
+
   sendError = (err) => {
-    fetch(this.config.url, {
-      body: JSON.stringify(err),
-      headers: {
-        'content-type': 'application/json',
-      },
-      method: 'POST',
-    }).then().then().catch((error) => {
-      console.log(error);
-    });
+    console.log(err);
+    // fetch(this.config.url, {
+    //   body: JSON.stringify(err),
+    //   headers: {
+    //     'content-type': 'application/json',
+    //   },
+    //   method: 'POST',
+    // }).then().then().catch((error) => {
+    //   console.log(error);
+    // });
   }
 
   init(options) {
@@ -126,9 +204,9 @@ class ErrorCatch {
     if (config.resourceError && addEventListener) {
       this.handleResourceError();
     }
-    // if (config.ajaxError) {
-    //   handleAjaxError(_window, config);
-    // }
+    if (config.ajaxError) {
+      this.handleAjaxError();
+    }
     // if (config.consoleError) {
     //   handleConsoleError(_window, config);
     // }
