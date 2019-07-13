@@ -41,7 +41,7 @@ class ErrorCatch {
         const { reason } = event;
         this.sendError({
           title: 'unhandledrejection',
-          msg: reason,
+          msg: reason.stack,
           category: 'js',
           level: 'error',
         });
@@ -146,15 +146,15 @@ handleAjaxError = () => {
 
   sendError = (err) => {
     console.log(err);
-    // fetch(this.config.url, {
-    //   body: JSON.stringify(err),
-    //   headers: {
-    //     'content-type': 'application/json',
-    //   },
-    //   method: 'POST',
-    // }).then().then().catch((error) => {
-    //   console.log(error);
-    // });
+    fetch(this.config.url, {
+      body: JSON.stringify(err),
+      headers: {
+        'content-type': 'application/json',
+      },
+      method: 'POST',
+    }).then().then().catch((error) => {
+      console.log(error);
+    });
   }
 
   init(options) {
