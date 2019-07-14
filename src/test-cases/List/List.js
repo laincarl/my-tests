@@ -33,6 +33,10 @@ class List extends Component {
 
   ajaxError=() => {
     axios.get('http://localhost/');
+    axios.get('http://localhost/2');
+    axios.post('http://localhost/', {
+      test: 'ss',
+    });
   }
 
   renderError=() => {

@@ -1,4 +1,5 @@
 /*eslint-disable */
+import BrowserInfo from 'browser-info';
 class ErrorCatch {
   handleWindowError = () => {
     const _oldWindowError = window.onerror;
@@ -38,6 +39,7 @@ class ErrorCatch {
   handleRejectPromise = () => {
     window.addEventListener('unhandledrejection', (event) => {
       if (event) {
+        console.log(event)
         const { reason } = event;
         this.sendError({
           title: 'unhandledrejection',
@@ -92,62 +94,82 @@ class ErrorCatch {
           category: 'ajax',
           level: 'error',
         });
-        throw error;  
+        throw error;
       });
   }
 
-handleAjaxError = () => {
-  const protocol = window.location.protocol;
-  if (protocol === 'file:') return;
+  _initListenAjax = function () {
+    const that = this;
+    const xhrOpen = window.XMLHttpRequest.prototype.open;
+    // 保存原生的 send 方法
+    const xhrSend = window.XMLHttpRequest.prototype.send;
 
-  // 处理fetch
-  this.handleFetchError();
+    window.XMLHttpRequest.prototype.open = function () {
+      const [method, url] = arguments;
+      this.request = {
+        method, url
+      }
+      xhrOpen.apply(this, arguments);
+    };
 
-  // 处理XMLHttpRequest
-  if (!window.XMLHttpRequest) {
-    return;   
-  } 
-  const xmlhttp = window.XMLHttpRequest;
-    
-  const _oldSend = xmlhttp.prototype.send;
-  const _handleEvent = (event, ...other) => {    
-    if (event && event.currentTarget && event.currentTarget.status !== 200) {
-      this.sendError({
-        title: event.target.responseURL,
-        msg: JSON.stringify({
-          response: event.target.response,
-          responseURL: event.target.responseURL,
-          status: event.target.status,
-          statusText: event.target.statusText,
-        }),
-        category: 'ajax',
-        level: 'error',
-      });
-    }
-  };
-  xmlhttp.prototype.send = function (...args) {
-    if (this.addEventListener) {
-      this.addEventListener('error', _handleEvent);
-      this.addEventListener('load', _handleEvent);
-      this.addEventListener('abort', _handleEvent);
-    } else {
-      const _oldStateChange = this.onreadystatechange;
-      this.onreadystatechange = (...args) => {  
-        const [event] = args;
+    window.XMLHttpRequest.prototype.send = function () {
+      const [body] = arguments
+      this.request.body = body;
+      this.addEventListener('readystatechange', function (event) {
         if (this.readyState === 4) {
-          _handleEvent(event);
+          if (!this.status || this.status >= 400) {
+            // 错误收集
+            console.log(this.request, body);
+            that.sendError({
+              title: event.target.responseURL,
+              msg: JSON.stringify({
+                response: event.target.response,
+                responseURL: event.target.responseURL,
+                status: event.target.status,
+                statusText: event.target.statusText,
+              }),
+              category: 'ajax',
+              level: 'error',
+              request: this.request
+            })
+          }
         }
-        _oldStateChange && _oldStateChange.apply(this, args);
-      };
-    }
-    return _oldSend.apply(this, args);
-  };
-}
+      });
+      xhrSend.apply(this, arguments);
+    };
+  }
+  _startLintenAjax = function () {
+    const self = this;
 
+    // ajax timeout
+    window.addEventListener("ajaxTimeout", function (err) {
+      console.log(err)
+      // if (err.detail.responseURL.indexOf(self._config.url) > -1) {
+      //   return;
+      // } else {
+
+      //   ajaxError(err, self._config);
+      // }
+    });
+
+    // ajax load error
+    window.addEventListener("ajaxLoad", function (err) {
+      if (err.detail.responseURL.indexOf(self._config.url) > -1) {
+        return;
+      } else {
+        console.log(err)
+        // ajaxError(err, self._config);
+      }
+    });
+  }
   sendError = (err) => {
     console.log(err);
+    const info = {
+      ...err,
+      browser: BrowserInfo()
+    }
     fetch(this.config.url, {
-      body: JSON.stringify(err),
+      body: JSON.stringify(info),
       headers: {
         'content-type': 'application/json',
       },
@@ -205,7 +227,7 @@ handleAjaxError = () => {
       this.handleResourceError();
     }
     if (config.ajaxError) {
-      this.handleAjaxError();
+      this._initListenAjax();
     }
     // if (config.consoleError) {
     //   handleConsoleError(_window, config);
