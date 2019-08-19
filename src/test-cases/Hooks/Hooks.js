@@ -1,31 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Button } from 'antd';
-import './Hooks.css';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Child from './Child';
+import SecChild from './SecChild';
 
-const Hooks = () => {
-  const [visible, setVisible] = useState(false);
-  const handleOk = () => {
-    setVisible(false);
-  };
-  const handleCancel = () => {
-    setVisible(false);
-  };
-  return (
-    <div>   
-      <Modal
-        title="Basic Modal"
-        visible={visible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Modal> 
-      <Button onClick={() => setVisible(true)}>open</Button>   
-    </div>
-  );
+class Hooks extends Component {
+  render() {
+    return (
+      <div>
+        Hooks
+        <Child />
+        <SecChild />
+      </div>
+    );
+  }
+}
+
+Hooks.propTypes = {
+
 };
-
 
 export default Hooks;
