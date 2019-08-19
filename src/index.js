@@ -6,13 +6,13 @@ import { Provider } from 'mobx-react';
 import MenuTest from './MenuTest';
 import Routes from './Router';
 import menuStore from './menuStore';
-import ErrorCatch from './ErrorCatch';
+// import ErrorCatch from './ErrorCatch';
 import './index.css';
 
 // Sentry.init({ dsn: 'https://5d4c26a6acab457c9e0f2621525c2170@sentry.io/1474700' });
-ErrorCatch.init({
-  url: 'http://localhost:9000/report',
-});
+// ErrorCatch.init({
+//   url: 'http://localhost:9000/report',
+// });
 const stores = {
   // Key can be whatever you want
   routing: menuStore,
