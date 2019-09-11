@@ -10,6 +10,15 @@ import Hoc from './Hoc';
 
 @observer
 class List extends Component {
+  getSnapshotBeforeUpdate() {
+    this.scrollTop = this.con.scrollTop;
+    this.scrollHeight = this.con.scrollHeight;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.con.scrollTop = this.scrollTop + (this.con.scrollHeight - this.scrollHeight);
+  }
+
   handleRefresh = () => {
     ListStore.ppp();
     ListStore.setList([{
@@ -27,11 +36,11 @@ class List extends Component {
     }]);
   }
 
-  fetchError=() => {
+  fetchError = () => {
     fetch('http://localhost/');
   }
 
-  ajaxError=() => {
+  ajaxError = () => {
     axios.get('http://localhost/');
     axios.get('http://localhost/2');
     axios.post('http://localhost/', {
@@ -39,32 +48,44 @@ class List extends Component {
     });
   }
 
-  renderError=() => {
+  renderError = () => {
     ListStore.setList(null);
   }
 
-  resourceError=() => {
+  resourceError = () => {
     const script = document.createElement('script');
     script.src = 'scriptLink.js';
     document.body.append(script);
   }
 
-  render() {
-    // const { list } = this.state;
-    const list = ListStore.getList;
-    return (
-      <div>
-        <Button onClick={this.handleRefresh}>refresh</Button>
-        <Button onClick={this.fetchError}>fetchError</Button>
-        <Button onClick={this.ajaxError}>ajaxError</Button>
-        <Button onClick={this.renderError}>renderError</Button>
-        <Button onClick={this.resourceError}>resourceError</Button>
-        <Hoc data={list}>
-          {data => <div>{data.map(item => <Item key={item.id} data={item} />)}</div>}
-        </Hoc>
-      </div>
-    );
-  }
+    addItem = () => {
+      ListStore.addItem();
+    }
+
+    handleScroll=(e) => {
+      console.log(e.target.scrollTop);
+      if (e.target.scrollTop === 0) {
+        this.addItem();
+      }
+    }
+    
+    render() {
+      // const { list } = this.state;
+      const list = ListStore.getList;
+      return (
+        <div>
+          <Button onClick={this.handleRefresh}>refresh</Button>
+          <Button onClick={this.fetchError}>fetchError</Button>
+          <Button onClick={this.ajaxError}>ajaxError</Button>
+          <Button onClick={this.renderError}>renderError</Button>
+          <Button onClick={this.resourceError}>resourceError</Button>
+          <Button onClick={this.addItem}>add</Button>
+          {/* <Hoc data={list}> */}
+          <div onScroll={this.handleScroll} style={{ height: 200, overflow: 'auto' }} ref={con => this.con = con}>{list.map(item => <Item key={item.id} data={item} />)}</div>
+          {/* </Hoc> */}
+        </div>
+      );
+    }
 }
 
 List.propTypes = {

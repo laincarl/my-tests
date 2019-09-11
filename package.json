@@ -41,15 +41,19 @@
         "immutability-helper": "^2.7.1",
         "inquirer": "^5.2.0",
         "interactjs": "^1.3.4",
+        "js-beautify": "^1.10.2",
         "lodash": "^4.17.11",
         "mobx-react-lite": "^1.4.1",
         "moment": "^2.22.2",
         "moment-range": "^4.0.1",
         "omit.js": "^1.0.0",
+        "pdfjs-dist": "2.2.228",
         "quill-emoji": "^0.1.7",
         "quill-mention": "^2.1.2",
+        "react-ace": "^7.0.4",
         "react-beautiful-dnd": "7.1.3",
         "react-booter": "^1.0.22",
+        "react-codemirror": "^1.0.0",
         "react-dnd": "^5.0.0",
         "react-dnd-html5-backend": "^5.0.1",
         "react-loadable": "^5.4.0",
@@ -57,6 +61,7 @@
         "react-router-hash-link": "^1.2.1",
         "react-transition-group": "^2.5.0",
         "react-virtualized": "^9.21.0",
+        "resize-observer-polyfill": "^1.5.1",
         "rxjs": "^6.4.0"
     }
 }
