@@ -92,7 +92,7 @@ class Virtualized extends Component {
           overscanRowCount={0}
           rowCount={1000}
           rowHeight={this._cache.rowHeight}
-          rowRenderer={this._rowRenderer2}
+          rowRenderer={this._rowRenderer}
           width={500}
         />
         {/* {Array(1000).fill(0).map(i => <Item2 />)} */}
