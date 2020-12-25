@@ -14,7 +14,7 @@ observable.subscribe((num) => {
   console.log(num)
 })
 observable.subscribe((num) => {
-  console.log('a'+num)
+  console.log(`a${num}`)
 })
 const docElm = document.documentElement;
 const { clientWidth, clientHeight } = docElm;
@@ -53,9 +53,7 @@ class Rxjs extends Component {
       <div>
         Rxjs
         <div style={{ width: 500, height: 500 }} ref={(outer) => { this.outer = outer; }}>
-          <div style={{ width: '100%', height: '100%', background: 'red' }} ref={(inner) => { this.inner = inner; }}>
-
-          </div>
+          <div style={{ width: '100%', height: '100%', background: 'red' }} ref={(inner) => { this.inner = inner; }} />
         </div>
       </div>
     );

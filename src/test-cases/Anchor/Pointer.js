@@ -10,11 +10,11 @@ export default class Pointer extends Component {
       return {
         active: true,
       };
-    } else {
+    } 
       return {
         active: false,
       };
-    }
+    
   }
 
   handlePointerClick=() => {

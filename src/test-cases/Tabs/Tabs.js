@@ -139,7 +139,7 @@ class Tabs extends Component {
 
 
   render() {
-    const props = this.props;
+    const {props} = this;
     const contents = [
       React.cloneElement(this.renderTabBar(), {
         key: 'tabBar',

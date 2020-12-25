@@ -97,7 +97,7 @@ const Pdf = ({
     <div className="pdf-viewer">
       <div className="pdf-viewer-content" ref={container} />
       {loading ? <Loading /> : (
-        <Fragment>
+        <>
           <div className="pdf-viewer-prePage">
             <Button
               shape="circle"
@@ -123,7 +123,7 @@ const Pdf = ({
               <Icon type="right" />
             </Button>
           </div>
-        </Fragment>
+        </>
       )}
     </div>
   );

@@ -83,7 +83,7 @@ class Virtualized extends Component {
 
   render() {
     return (
-      <Fragment>
+      <>
         <List
           ref={thisList => this.list = thisList}
         // className={styles.BodyGrid}
@@ -96,7 +96,7 @@ class Virtualized extends Component {
           width={500}
         />
         {/* {Array(1000).fill(0).map(i => <Item2 />)} */}
-      </Fragment>
+      </>
       
     );
   }

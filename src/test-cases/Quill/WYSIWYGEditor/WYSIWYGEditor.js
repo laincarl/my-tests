@@ -90,7 +90,7 @@ class WYSIWYGEditor extends Component {
       loading, isFullScreen,
     } = this.state;
     return (
-      <Fragment>
+      <>
         <BaseEditor
           {...restProps}
           ref={this.saveRef('Editor')}
@@ -126,7 +126,7 @@ class WYSIWYGEditor extends Component {
             </Modal>
           )
         }
-      </Fragment>
+      </>
     );
   }
 }

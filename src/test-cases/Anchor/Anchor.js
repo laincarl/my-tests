@@ -32,7 +32,7 @@ class Anchor extends Component {
   handleScroll = (e) => {
     for (let i = 0; i < this.points.length; i += 1) {
       const point = this.points[i].ref;
-      if (point.offsetTop + point.offsetHeight > this.getContainer().scrollTop + 100) {       
+      if (point.offsetTop + point.offsetHeight > this.getContainer().scrollTop + 100) {
         this.setState({
           current: this.points[i].id,
         });
@@ -48,7 +48,7 @@ class Anchor extends Component {
   handleScrollTo = (id) => {
     for (let i = 0; i < this.points.length; i += 1) {
       const pointId = this.points[i].id;
-      if (pointId === id) { 
+      if (pointId === id) {
         this.points[i].ref.scrollIntoView({
           behavior: 'smooth',
           block: 'start',

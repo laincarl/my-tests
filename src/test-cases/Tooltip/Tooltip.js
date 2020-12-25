@@ -73,10 +73,10 @@ class Tooltip extends Component {
 
   render() {
     return (
-      <Fragment>
+      <>
         {this.renderChildren()}
         {this.renderTip()}
-      </Fragment>
+      </>
     );
   }
 }

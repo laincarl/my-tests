@@ -207,14 +207,14 @@ class BaseEditor extends Component {
                 type="primary"
                 onClick={onCancel}
               >
-                {'取消'}
+                取消
               </Button>
               <Button
                 type="primary"
                 loading={loading}
                 onClick={onSave}
               >
-                {'保存'}
+                保存
               </Button>
             </div>
           )

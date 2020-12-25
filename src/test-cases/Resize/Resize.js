@@ -24,7 +24,7 @@ class Resize extends Component {
 
   render() {
     return (
-      <Fragment>
+      <>
         <div style={{ display: 'flex' }}>
           <div contentEditable>
             111
@@ -45,7 +45,7 @@ class Resize extends Component {
           <div className="child" />
           <div className="child" />
         </div>
-      </Fragment>
+      </>
 
     );
   }
