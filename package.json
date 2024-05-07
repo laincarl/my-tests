@@ -46,7 +46,7 @@
     "lodash": "^4.17.15",
     "mobx-react-lite": "^2.0.7",
     "moment": "^2.25.3",
-    "pdfjs-dist": "2.3.200",
+    "pdfjs-dist": "4.2.67",
     "quill-emoji": "^0.1.7",
     "quill-mention": "^2.2.5",
     "react-ace": "^8.1.0",
